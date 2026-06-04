@@ -1,22 +1,24 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "msm-free">
 <!ENTITY author "luochuhan">
-<!ENTITY version "0.2.0">
+<!ENTITY version "0.2.1">
 <!ENTITY githubRepo "scoltzero/msm-free">
-<!ENTITY releaseTag "v0.2.0">
-<!ENTITY packageName "msm-free-0.2.0-x86_64-1">
+<!ENTITY releaseTag "v0.2.1">
+<!ENTITY packageName "msm-free-0.2.1-x86_64-1">
 <!ENTITY packageFile "&packageName;.txz">
 <!ENTITY packageURL "https://github.com/&githubRepo;/releases/download/&releaseTag;/&packageFile;">
-<!ENTITY packageSHA256 "d493d60462bfab6fab76dff733bdda6b91eece351cfe14269d955a8210787fbe">
+<!ENTITY packageSHA256 "2357ea08f68b9a8866b5877dbe3552104db36597b8076970e914f30c8439beb7">
 ]>
 <PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="https://raw.githubusercontent.com/&githubRepo;/main/msm-free.plg" launch="Settings/&name;" icon="network-wired" min="6.12.0">
   <CHANGES>
     <![CDATA[
-### msm-free 0.2.0
-- 系统诊断页对齐原版，只保留配置目录、配置文件、依赖项、端口、磁盘空间和文件权限 6 项检查。
-- 移除最近错误日志、服务状态和 nftables 状态对诊断健康度的影响，避免 Mihomo 普通告警造成系统误报。
-- MosDNS 规则分类对齐原版个人名单顺序，将广告拦截和在线分流改为特殊分类返回。
-- 保留旧版规则分类 URL 的兼容响应，避免历史页面或书签访问异常。
+### msm-free 0.2.1
+- 复刻原版 MSM 6 步初始化向导，并接入现有初始化 API。
+- 修复订阅保存格式，避免 Mihomo provider 出现空 URL 或 `[]`。
+- 支持初始化阶段添加手动节点，生成 `proxy_providers/msm_manual.yaml` 本地供应商。
+- 补充 `ss`、`ssr`、`vmess`、`vless`、`trojan`、`hysteria`、`hysteria2`、`tuic` 分享链接基础解析。
+- 修复 GitHub 下载代理和加速配置，支持 HTTP、HTTPS、SOCKS5。
+- 修复 MosDNS 代理模式语义、Mihomo 节点页宽度适配、侧边栏滚动保持和更新配置保存回显。
     ]]>
   </CHANGES>
 
@@ -56,8 +58,8 @@ set +e
 if [ -x /etc/rc.d/rc.msm-free ]; then
   /etc/rc.d/rc.msm-free stop
 fi
-removepkg msm-free-0.2.0-x86_64-1
-rm -f /boot/config/plugins/msm-free/msm-free-0.2.0-x86_64-1.txz
+removepkg msm-free-0.2.1-x86_64-1
+rm -f /boot/config/plugins/msm-free/msm-free-0.2.1-x86_64-1.txz
 echo "msm-free plugin removed. Persistent data remains under /mnt/user/appdata/msm-free unless you delete it manually."
       ]]>
     </INLINE>

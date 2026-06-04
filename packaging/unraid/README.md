@@ -11,25 +11,32 @@ Generated files:
 Build:
 
 ```bash
-make unraid VERSION=0.1.10 UNRAID_VERSION=0.1.10 GITHUB_REPO=<owner>/msm-free RELEASE_TAG=v0.1.10
+make unraid VERSION=0.2.1 UNRAID_VERSION=0.2.1 GITHUB_REPO=scoltzero/msm-free RELEASE_TAG=v0.2.1
 ```
 
-Publish the generated `.txz` package to the GitHub release named by `RELEASE_TAG`, then commit the generated root `msm-free.plg`.
+Publish the generated `.txz` package and `.plg` file to the GitHub release named by `RELEASE_TAG`, then commit the generated root `msm-free.plg` when you want a branch-based install URL.
 
 Example:
 
 ```bash
-gh release create v0.1.10 \
-  dist/unraid/msm-free-0.1.10-x86_64-1.txz \
+gh release create v0.2.1 \
+  dist/unraid/msm-free-0.2.1-x86_64-1.txz \
+  dist/unraid/msm-free.plg \
   dist/msm-free-linux-amd64.tar.gz \
-  --title "msm-free v0.1.10" \
-  --notes "Initial msm-free x86_64 and Unraid plugin release."
+  --title "v0.2.1" \
+  --notes-file /tmp/msm-free-v0.2.1-release-notes.md
 ```
 
-Install URL for Unraid:
+Recommended install URL for the v0.2.1 release:
 
 ```text
-https://raw.githubusercontent.com/<owner>/msm-free/main/msm-free.plg
+https://github.com/scoltzero/msm-free/releases/download/v0.2.1/msm-free.plg
+```
+
+Branch install URL, only after the generated root `msm-free.plg` has been committed to that branch:
+
+```text
+https://raw.githubusercontent.com/scoltzero/msm-free/<branch>/msm-free.plg
 ```
 
 ## Runtime Behavior
