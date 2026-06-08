@@ -85,6 +85,30 @@ The data directory defaults to `/opt/msf` on generic Linux and `/mnt/user/appdat
 - `database`
 - `backups`
 
+## Router Integration (make LAN devices use msf)
+
+msf runs as a **bypass router** by default: it is not the main gateway. The main router steers **DNS queries** and **traffic to be proxied** to the msf host. Two steps are required on the main router:
+
+1. **Redirect DHCP DNS** to the msf host (MosDNS `:53`).
+2. **Add FakeIP static routes** with the msf host as next hop.
+
+| Type | Destination (msf default) | Next hop |
+|---|---|---|
+| IPv4 | `28.0.0.0/8` | msf host IPv4 |
+| IPv6 | `f2b0::/18` | msf host IPv6 |
+
+> DNS alone is not enough: FakeIP addresses are virtual, and without a return route they are dropped or sent out directly. Both steps are required. The FakeIP ranges must match your setup-wizard configuration.
+
+Step-by-step guides per main router:
+
+- [Router integration overview](docs/guide/en/router-integration.md)
+- [RouterOS (MikroTik)](docs/guide/en/routeros.md)
+- [iKuai](docs/guide/en/ikuai.md)
+- [OpenWrt](docs/guide/en/openwrt.md)
+- [UniFi (Ubiquiti)](docs/guide/en/unifi.md)
+
+Verify: on a client, `nslookup google.com` should fall within `28.0.0.0/8` and `dig AAAA google.com` within `f2b0::/18`.
+
 ## Notes
 
 This project does not contain MSM closed-source backend code. The UI and API behavior are reimplemented from public documentation, mssb behavior, and local compatibility observations.
