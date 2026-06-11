@@ -24,6 +24,7 @@
 - 支持按运行架构下载组件核心，ARM64 版本会下载并校验 ARM64 MosDNS/Mihomo。
 - 支持普通 Linux systemd 安装包。
 - 支持 Unraid 插件安装方式。
+- 支持 Docker host 网络部署方式。
 
 ## 下载
 
@@ -143,10 +144,10 @@ sudo ./uninstall.sh --purge
 在 Unraid WebGUI 中打开 **Plugins / Install Plugin**，填入插件地址：
 
 ```text
-https://github.com/scoltzero/msf/releases/download/v0.3.0/msf.plg
+https://github.com/scoltzero/msf/releases/download/v0.3.1/msf.plg
 ```
 
-安装完成后打开 **Settings / MSF Free**，进入插件设置页，再点击打开 WebUI。
+安装完成后打开 **Settings / MSF Free**，进入轻量插件控制页，再点击打开 WebUI。完整管理界面运行在独立 WebUI 中，不嵌入 Unraid Settings 页面。
 
 Unraid 默认数据目录：
 
@@ -160,6 +161,7 @@ Unraid 运行逻辑：
 - 完成初始化引导后，默认启用 Mihomo、MosDNS 和 nftables。
 - Unraid 重启或插件服务重启后，`msf` 会按已保存状态恢复 Mihomo、MosDNS 和 nftables。
 - 如果用户在 WebUI 中手动停止服务或清除 nftables，下次启动会尊重这个关闭状态。
+- 在线安装 MosDNS、Mihomo、Zashboard 时会先校验 GitHub release asset SHA-256 digest；本地上传核心标记为 `local-upload`。
 
 Unraid 停止服务：
 
@@ -170,6 +172,30 @@ Unraid 停止服务：
 Unraid 卸载请在 WebGUI 的插件管理页面删除 `msf` 插件。插件卸载会停止 WebUI 服务并移除插件文件，默认保留 `/mnt/user/appdata/msf` 数据目录；如需彻底清理，需要手动删除该目录。
 
 Unraid 上不要使用 `msf update` 或 `msf uninstall`，更新和卸载应通过 Unraid 插件管理页面完成，避免绕过 `.plg` 包状态。
+
+## Docker 部署
+
+Docker 镜像使用 host 网络一比一复刻普通 Linux 二进制能力，容器会写入宿主机 nftables 和策略路由。不要使用 br0、macvlan、ipvlan 或 bridge 静态 IP 作为等价部署方式。
+
+使用 Docker Compose：
+
+```bash
+docker compose up -d
+```
+
+没有 `docker compose` 时可以使用普通 Docker：
+
+```bash
+./docker-run.sh
+```
+
+两种方式默认数据目录均为当前目录下的 `./msf-data`，WebUI 仍为：
+
+```text
+http://<服务器IP>:7777
+```
+
+详细要求、普通 `docker run` 命令、关闭清理和升级方式见 [Docker 部署文档](docs/docker.md)。
 
 ## 初始化配置说明
 

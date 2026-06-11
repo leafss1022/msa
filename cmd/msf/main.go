@@ -218,7 +218,7 @@ func serve(dataDir, host string, port int) error {
 		<-ctx.Done()
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
-		_ = app.Services.StopAll(shutdownCtx)
+		_ = app.ShutdownRuntime(shutdownCtx)
 		_ = srv.Shutdown(shutdownCtx)
 	}()
 
@@ -457,6 +457,9 @@ type uninstallOptions struct {
 }
 
 func uninstallRuntime(opts uninstallOptions) error {
+	if server.IsDockerRuntime() {
+		return errors.New("Docker containers should be removed by stopping/removing the container; application data is kept in the mounted volume")
+	}
 	if os.Geteuid() != 0 {
 		return errors.New("uninstall must be run as root")
 	}
@@ -518,6 +521,9 @@ type updateOptions struct {
 }
 
 func updateRuntime(opts updateOptions) error {
+	if server.IsDockerRuntime() {
+		return errors.New(server.DockerUpdateDisabledReason())
+	}
 	if os.Geteuid() != 0 {
 		return errors.New("update must be run as root")
 	}
@@ -589,6 +595,9 @@ type serviceOptions struct {
 }
 
 func serviceCommand(action string, opts serviceOptions) error {
+	if server.IsDockerRuntime() && (action == "install" || action == "uninstall" || action == "remove") {
+		return errors.New("Docker containers do not use systemd service install/uninstall; update or remove the container instead")
+	}
 	switch action {
 	case "install":
 		return installSystemdService(opts)
