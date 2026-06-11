@@ -85,6 +85,28 @@ The data directory defaults to `/opt/msf` on generic Linux and `/mnt/user/appdat
 - `database`
 - `backups`
 
+## Service Port Allocation
+
+Ports below are the ones the project actually listens on (taken from the diagnostic/health-check lists in `internal/server`). supervisor manages processes over a unix socket and uses no TCP port, so it is not listed.
+
+| Service | Port | Description |
+|---|---|---|
+| msf | 7777 | Web management UI (default `-p 7777`); also reused by mosdns to resolve node domains |
+| mosdns | 53 | DNS service entry |
+| mosdns | 2222 | Internal domestic DNS server |
+| mosdns | 3333 | Forward overseas queries to the internal cache-with-expiry service |
+| mosdns | 4444 | Overseas DNS server with expiring cache (internal/external use) |
+| mosdns | 5656 | Main routing/split server |
+| mosdns | 6666 | DNS bridge to mihomo/sing-box |
+| mosdns | 8888 | Internal DNS (proxy core's `default-nameserver` upstream) |
+| mosdns | 9099 | MosDNS stats / API endpoint |
+| mihomo/sing-box | 7890 | HTTP proxy |
+| mihomo/sing-box | 7891 | SOCKS5 proxy |
+| mihomo/sing-box | 7892 | Mixed port |
+| mihomo/sing-box | 7896 | TProxy transparent proxy (used by nftables policy) |
+| mihomo/sing-box | 7877 | Redirect proxy (used by nftables policy) |
+| mihomo/sing-box | 9090 | External controller / web UI (zashboard) |
+
 ## Router Integration (make LAN devices use msf)
 
 msf runs as a **bypass router** by default: it is not the main gateway. The main router steers **DNS queries** and **traffic to be proxied** to the msf host. Two steps are required on the main router:
