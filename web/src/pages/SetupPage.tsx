@@ -898,8 +898,6 @@ export function SetupPage() {
     if (form.username.trim().length < 2) errors.push({ step: 1, message: "管理员用户名至少需要 2 个字符" });
     if (form.password.length === 0) {
       errors.push({ step: 1, message: "请输入管理员密码" });
-    } else if (form.password.length < 8) {
-      errors.push({ step: 1, message: "管理员密码至少需要 8 位" });
     }
     if (form.confirmPassword.length === 0) {
       errors.push({ step: 1, message: "请再次输入管理员密码" });
