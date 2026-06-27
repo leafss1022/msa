@@ -6,6 +6,8 @@
 
 [中文 README](README.md)
 
+[FAQ](docs/faq.en.md)
+
 `msf` is an open-source reimplementation of the MSM-style management experience for the MosDNS + Mihomo workflow. It focuses on self-hosted DNS split routing, transparent proxy management, Mihomo management, and platform-native installs.
 
 Current release: `v0.3.6`
@@ -25,7 +27,7 @@ Current release: `v0.3.6`
 ## Architecture Diagram
 
 <p align="center">
-  <img src="docs/png/framework-architecture.svg" alt="msf side-router proxy architecture diagram">
+  <img src="docs/png/framework-architecture.en.svg" alt="msf side-router proxy architecture diagram">
 </p>
 
 ## Platform Support
@@ -94,6 +96,7 @@ Thanks to:
 
 - [`msm9527/msm-wiki`](https://github.com/msm9527/msm-wiki), used as the public reference for the MSM management experience.
 - [`baozaodetudou/mssb`](https://github.com/baozaodetudou/mssb), used as the public reference for the MosDNS + Mihomo backend behavior.
+- [Gzh256](https://github.com/Gzh256), with thanks for helping test and validate multiple versions.
 
 This project is not affiliated with the upstream MSM or mssb projects.
 
