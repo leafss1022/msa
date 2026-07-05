@@ -1,0 +1,19 @@
+[Unit]
+Description=msa service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/msa
+Environment=MSA_DATA_DIR=/opt/msa
+ExecStart=/usr/local/bin/msa serve --config /opt/msa --host 0.0.0.0 --port 7777
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=30
+LimitNOFILE=1048576
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,19 @@
+services:
+  msa:
+    image: ghcr.io/scoltzero/msa:v0.3.9.2
+    container_name: msa
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      MSA_RUNTIME: docker
+      MSA_DATA_DIR: /opt/msa
+      MSA_DOCKER_NETWORK_MODE: host-tun
+      MSA_DOCKER_CLEANUP_NETWORK_ON_EXIT: "false"
+    volumes:
+      - ./msa-data:/opt/msa
+    restart: unless-stopped
+    stop_grace_period: 30s

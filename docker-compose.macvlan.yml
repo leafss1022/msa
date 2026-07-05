@@ -1,0 +1,32 @@
+services:
+  msa:
+    image: ${MSA_IMAGE:-ghcr.io/scoltzero/msa:v0.3.9.2}
+    container_name: ${MSA_CONTAINER_NAME:-msa}
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      MSA_RUNTIME: docker
+      MSA_DATA_DIR: /opt/msa
+      MSA_DOCKER_NETWORK_MODE: macvlan-tun
+      MSA_DOCKER_CLEANUP_NETWORK_ON_EXIT: "false"
+    volumes:
+      - ${MSA_DOCKER_DATA_DIR:-./msa-data}:/opt/msa
+    networks:
+      msa_macvlan:
+        ipv4_address: ${MSA_DOCKER_IPV4_ADDRESS:?set MSA_DOCKER_IPV4_ADDRESS}
+    restart: unless-stopped
+    stop_grace_period: 30s
+
+networks:
+  msa_macvlan:
+    name: ${MSA_DOCKER_NETWORK_NAME:-msa-macvlan}
+    driver: macvlan
+    driver_opts:
+      parent: ${MSA_DOCKER_PARENT_IFACE:?set MSA_DOCKER_PARENT_IFACE}
+    ipam:
+      config:
+        - subnet: ${MSA_DOCKER_SUBNET:?set MSA_DOCKER_SUBNET}
+          gateway: ${MSA_DOCKER_GATEWAY:?set MSA_DOCKER_GATEWAY}
