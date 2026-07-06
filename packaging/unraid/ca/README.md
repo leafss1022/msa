@@ -11,13 +11,13 @@
 | `../../../ca_profile.xml` | 仓库根的 **维护者资料**（`<CommunityApplications>`：`Profile/Icon/WebPage`） |
 | `ca/msa.xml` | **CA 插件模板**（根元素 `<Plugin>`：`Name/PluginURL/Icon/Overview/Support/Project/Category/Beta`） |
 | `../msa.png` | 256×256 列表图标（被 `ca_profile.xml` 与 `ca/msa.xml` 的 `<Icon>` 引用） |
-| `../../../msa.plg` | 安装入口，`<PLUGIN>` 已补 `support="https://github.com/scoltzero/msa/issues"` |
+| `../../../msa.plg` | 安装入口，`<PLUGIN>` 已补 `support="https://github.com/leafss1022/msa/issues"` |
 
-> 所有 `<Icon>` / `<PluginURL>` 都用 `raw.githubusercontent.com/scoltzero/msa/main/...` 的 raw 链接，**前提是仓库 public 且这些文件已推到 `main`**。
+> 所有 `<Icon>` / `<PluginURL>` 都用 `raw.githubusercontent.com/leafss1022/msa/main/...` 的 raw 链接，**前提是仓库 public 且这些文件已推到 `main`**。
 
 ## 上架前置条件（CA 官方要求）
 
-1. 仓库 **public** 且持续维护 ✅（`scoltzero/msa`，确认已设为 public）
+1. 仓库 **public** 且持续维护 ✅（`leafss1022/msa`，确认已设为 public）
 2. 仓库根有 **OSI LICENSE** ✅（GPL-3.0 已放）
 3. 有效的 **plugin 包装 XML** ✅（`ca/msa.xml`）
 4. **`ca_profile.xml`** 含非空 `<Profile>` ✅（仓库根）
@@ -27,9 +27,9 @@
 
 1. 把本次新增/修改的文件 commit 并 push 到 `main`（`LICENSE`、`ca_profile.xml`、`packaging/unraid/ca/msa.xml`、`packaging/unraid/msa.png`、两个 `.plg` 的 `support=`）。
 2. 确认 raw 链接可公网访问，例如：
-   - `https://raw.githubusercontent.com/scoltzero/msa/main/msa.plg`
-   - `https://raw.githubusercontent.com/scoltzero/msa/main/packaging/unraid/msa.png`
-3. 打开 **https://ca.unraid.net/submit** → Start Submission，填入仓库地址 `https://github.com/scoltzero/msa`。
+   - `https://raw.githubusercontent.com/leafss1022/msa/main/msa.plg`
+   - `https://raw.githubusercontent.com/leafss1022/msa/main/packaging/unraid/msa.png`
+3. 打开 **https://ca.unraid.net/submit** → Start Submission，填入仓库地址 `https://github.com/leafss1022/msa`。
 4. 让门户扫描仓库（会读 `ca_profile.xml` + 插件 XML），过查重（duplicate sweep）、预览列表。
 5. 提交，等待审核。审核通过后用户即可在 CA 里搜索 “msa” 安装。
 

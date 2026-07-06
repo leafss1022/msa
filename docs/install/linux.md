@@ -8,13 +8,13 @@
 
 | 架构 | 下载地址 |
 |---|---|
-| x86_64 / amd64 | `https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa-linux-amd64.tar.gz` |
-| ARM64 / aarch64 | `https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa-linux-arm64.tar.gz` |
+| x86_64 / amd64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa-linux-amd64.tar.gz` |
+| ARM64 / aarch64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa-linux-arm64.tar.gz` |
 
 Release 页面：
 
 ```text
-https://github.com/scoltzero/msa/releases/tag/v0.3.9.2
+https://github.com/leafss1022/msa/releases/tag/v0.3.9.2
 ```
 
 ## 安装
@@ -23,7 +23,7 @@ x86_64 / amd64：
 
 ```bash
 curl -L -o msa-linux-amd64.tar.gz \
-  https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa-linux-amd64.tar.gz
+  https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa-linux-amd64.tar.gz
 
 tar -xzf msa-linux-amd64.tar.gz -C /tmp
 sudo /tmp/msa-0.3.9.2-linux-amd64/install.sh
@@ -33,7 +33,7 @@ ARM64 / aarch64：
 
 ```bash
 curl -L -o msa-linux-arm64.tar.gz \
-  https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa-linux-arm64.tar.gz
+  https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa-linux-arm64.tar.gz
 
 tar -xzf msa-linux-arm64.tar.gz -C /tmp
 sudo /tmp/msa-0.3.9.2-linux-arm64/install.sh

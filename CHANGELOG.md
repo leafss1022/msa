@@ -14,7 +14,7 @@
 
 - 这是一次 Mihomo 配置管理热修复发布，用于替换并下架存在 provider 同步问题的 v0.3.9 / v0.3.9.1。
 - 本版本 GitHub Release 资产数量与 v0.3.9 保持一致：Linux amd64/arm64 tarball、Unraid `.txz`/`.plg`，以及从同步后的 `fnos-fpk` 分支构建的 fnOS x86/arm `.fpk` 包，共 12 个 release assets。
-- Docker 镜像额外以 `ghcr.io/scoltzero/msa:v0.3.9.2` 发布，不推送 `latest`。
+- Docker 镜像额外以 `ghcr.io/leafss1022/msa:v0.3.9.2` 发布，不推送 `latest`。
 
 #### 包含 v0.3.9 的正确改动
 
@@ -49,7 +49,7 @@
 
 - This is a Mihomo config-management hotfix release that replaces and retires v0.3.9 / v0.3.9.1, which had incorrect provider synchronization behavior.
 - GitHub Release assets remain aligned with v0.3.9: Linux amd64/arm64 tarballs, Unraid `.txz`/`.plg`, and fnOS x86/arm `.fpk` packages built from the synced `fnos-fpk` branch, for 12 release assets total.
-- The Docker image is additionally published as `ghcr.io/scoltzero/msa:v0.3.9.2`. The `latest` tag is not pushed.
+- The Docker image is additionally published as `ghcr.io/leafss1022/msa:v0.3.9.2`. The `latest` tag is not pushed.
 
 #### Included From The Valid v0.3.9 Changes
 
@@ -86,7 +86,7 @@
 
 - 这是一次 Docker host-tun 路由、Mihomo 用户配置管理和 YAML 编辑器体验修复发布。
 - 本版本 GitHub Release 资产数量与 v0.3.8 保持一致：Linux amd64/arm64 tarball、Unraid `.txz`/`.plg`，以及从同步后的 `fnos-fpk` 分支构建的 fnOS x86/arm `.fpk` 包，共 12 个 release assets。
-- Docker 镜像额外以 `ghcr.io/scoltzero/msa:v0.3.9` 发布，不推送 `latest`。
+- Docker 镜像额外以 `ghcr.io/leafss1022/msa:v0.3.9` 发布，不推送 `latest`。
 
 #### 修复
 
@@ -110,7 +110,7 @@
 
 - This is a fix release for Docker host-tun routing, Mihomo user config management, and YAML editor usability.
 - GitHub Release assets remain aligned with v0.3.8: Linux amd64/arm64 tarballs, Unraid `.txz`/`.plg`, and fnOS x86/arm `.fpk` packages built from the synced `fnos-fpk` branch, for 12 release assets total.
-- The Docker image is additionally published as `ghcr.io/scoltzero/msa:v0.3.9`. The `latest` tag is not pushed.
+- The Docker image is additionally published as `ghcr.io/leafss1022/msa:v0.3.9`. The `latest` tag is not pushed.
 
 #### Fixed
 
@@ -136,7 +136,7 @@
 
 - 这是一次 Linux TUN / Docker TUN DNS 与 Fake-IP 路由修复发布。
 - 本版本 GitHub Release 资产数量与 v0.3.7 保持一致：Linux amd64/arm64 tarball、Unraid `.txz`/`.plg`，以及从同步后的 `fnos-fpk` 分支构建的 fnOS x86/arm `.fpk` 包，共 12 个 release assets。
-- Docker 镜像额外以 `ghcr.io/scoltzero/msa:v0.3.8` 发布，不推送 `latest`。
+- Docker 镜像额外以 `ghcr.io/leafss1022/msa:v0.3.8` 发布，不推送 `latest`。
 
 #### 修复
 
@@ -152,7 +152,7 @@
 
 - This is a Linux TUN / Docker TUN DNS and Fake-IP routing fix release.
 - GitHub Release assets remain aligned with v0.3.7: Linux amd64/arm64 tarballs, Unraid `.txz`/`.plg`, and fnOS x86/arm `.fpk` packages built from the synced `fnos-fpk` branch, for 12 release assets total.
-- The Docker image is additionally published as `ghcr.io/scoltzero/msa:v0.3.8`. The `latest` tag is not pushed.
+- The Docker image is additionally published as `ghcr.io/leafss1022/msa:v0.3.8`. The `latest` tag is not pushed.
 
 #### Fixed
 
@@ -170,7 +170,7 @@
 
 - 这是一次 Docker TUN 实验部署、文档入口和社区致谢更新发布。
 - 本版本 GitHub Release 资产数量与 v0.3.6 保持一致：Linux amd64/arm64 tarball、Unraid `.txz`/`.plg`，以及从同步后的 `fnos-fpk` 分支构建的 fnOS x86/arm `.fpk` 包，共 12 个 release assets。
-- Docker 镜像额外以 `ghcr.io/scoltzero/msa:v0.3.7` 发布，不推送 `latest`。
+- Docker 镜像额外以 `ghcr.io/leafss1022/msa:v0.3.7` 发布，不推送 `latest`。
 
 #### 新增
 
@@ -201,7 +201,7 @@
 
 - This release adds the experimental Docker TUN runtime, documentation entry updates, and community acknowledgements.
 - GitHub Release assets remain aligned with v0.3.6: Linux amd64/arm64 tarballs, Unraid `.txz`/`.plg`, and fnOS x86/arm `.fpk` packages built from the synced `fnos-fpk` branch, for 12 release assets total.
-- The Docker image is additionally published as `ghcr.io/scoltzero/msa:v0.3.7`. The `latest` tag is not pushed.
+- The Docker image is additionally published as `ghcr.io/leafss1022/msa:v0.3.7`. The `latest` tag is not pushed.
 
 #### Added
 
@@ -644,7 +644,7 @@
 
 ### 说明
 
-- 项目品牌与工程标识从 `msm-free` / `MSM Free` 迁移为 `msa` / `MSA Free`，GitHub 仓库发布路径切换到 `scoltzero/msa`。
+- 项目品牌与工程标识从 `msm-free` / `MSM Free` 迁移为 `msa` / `MSA Free`，GitHub 仓库发布路径切换到 `leafss1022/msa`。
 - Linux v0.2.2 用户可通过原有 WebUI 自更新入口升级：发布包继续提供 `msm-free-linux-amd64.tar.gz` 与 `msm-free-linux-arm64.tar.gz` 兼容副本，内容与新 `msa-*` 包逐字节一致。
 
 ### 新增

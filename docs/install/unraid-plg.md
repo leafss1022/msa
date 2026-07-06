@@ -9,7 +9,7 @@
 在 Unraid WebGUI 中打开 **Plugins / Install Plugin**，填入插件地址：
 
 ```text
-https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa.plg
+https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa.plg
 ```
 
 安装完成后打开 **Settings / MSA Free**，进入轻量插件控制页，再点击打开 WebUI。完整管理界面运行在独立 WebUI 中，不嵌入 Unraid Settings 页面。

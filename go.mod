@@ -1,4 +1,4 @@
-module github.com/scoltzero/msa
+module github.com/leafss1022/msa
 
 go 1.24.0
 

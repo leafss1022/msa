@@ -284,7 +284,7 @@ func (a *App) handleUpdateCheck(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	a.setSelfUpdateState("checking", "checking", 1, "正在检查最新版本", "", "info", "开始检查最新版本")
-	release, err := a.fetchLatestRelease("scoltzero", "msa")
+	release, err := a.fetchLatestRelease("leafss1022", "msa")
 	if err != nil {
 		a.setSelfUpdateState("failed", "failed", 1, "检查更新失败", err.Error(), "error", "检查更新失败: "+err.Error())
 		writeJSON(w, http.StatusOK, map[string]any{"success": false, "error": err.Error(), "data": a.selfUpdateState()})
@@ -383,7 +383,7 @@ func (a *App) handleUpdateConfigPut(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) handleUpdateReleases(w http.ResponseWriter, r *http.Request) {
-	releases, err := a.fetchReleases("scoltzero", "msa")
+	releases, err := a.fetchReleases("leafss1022", "msa")
 	if err != nil {
 		writeJSON(w, http.StatusOK, map[string]any{"success": false, "error": err.Error(), "data": []any{}})
 		return
@@ -404,7 +404,7 @@ func (a *App) handleUpdateDownload(w http.ResponseWriter, r *http.Request) {
 	rawURL := strings.TrimSpace(fmt.Sprint(state["download_url"]))
 	if rawURL == "" {
 		a.setSelfUpdateState("checking", "checking", 1, "正在获取最新发布信息", "", "info", "下载前获取最新发布信息")
-		release, err := a.fetchLatestRelease("scoltzero", "msa")
+		release, err := a.fetchLatestRelease("leafss1022", "msa")
 		if err != nil {
 			a.setSelfUpdateState("failed", "failed", 1, "获取发布信息失败", err.Error(), "error", "获取发布信息失败: "+err.Error())
 			writeJSON(w, http.StatusOK, map[string]any{"success": false, "error": err.Error(), "data": a.selfUpdateState()})

@@ -9,13 +9,13 @@
 Release 页面：
 
 ```text
-https://github.com/scoltzero/msa/releases/tag/v0.3.9.2
+https://github.com/leafss1022/msa/releases/tag/v0.3.9.2
 ```
 
 | 架构 | FPK 资产 |
 |---|---|
-| x86 / amd64 | `https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa_0.3.9.2_x86.fpk` |
-| ARM / arm64 | `https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa_0.3.9.2_arm.fpk` |
+| x86 / amd64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa_0.3.9.2_x86.fpk` |
+| ARM / arm64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa_0.3.9.2_arm.fpk` |
 
 请按 fnOS 设备 CPU 架构选择对应安装包。发布时也会提供对应 `.sha256` 校验文件。
 

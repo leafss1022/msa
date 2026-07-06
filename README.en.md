@@ -46,16 +46,16 @@ Current release: `v0.3.9.2`
 GitHub Release:
 
 ```text
-https://github.com/scoltzero/msa/releases/tag/v0.3.9.2
+https://github.com/leafss1022/msa/releases/tag/v0.3.9.2
 ```
 
 | Asset | URL |
 |---|---|
-| Linux x86_64 | `https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa-linux-amd64.tar.gz` |
-| Linux ARM64 | `https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa-linux-arm64.tar.gz` |
-| fnOS x86 FPK | `https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa_0.3.9.2_x86.fpk` |
-| fnOS ARM FPK | `https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa_0.3.9.2_arm.fpk` |
-| Unraid PLG | `https://github.com/scoltzero/msa/releases/download/v0.3.9.2/msa.plg` |
+| Linux x86_64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa-linux-amd64.tar.gz` |
+| Linux ARM64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa-linux-arm64.tar.gz` |
+| fnOS x86 FPK | `https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa_0.3.9.2_x86.fpk` |
+| fnOS ARM FPK | `https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa_0.3.9.2_arm.fpk` |
+| Unraid PLG | `https://github.com/leafss1022/msa/releases/download/v0.3.9.2/msa.plg` |
 
 ## Quick Start
 
