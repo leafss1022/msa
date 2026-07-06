@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
-  <title id="title">MSM Free logo</title>
-  <desc id="desc">Motion-ready layered version of the original MSM Free raster logo.</desc>
+  <title id="title">MSA Free logo</title>
+  <desc id="desc">Motion-ready layered version of the original MSA Free raster logo.</desc>
   <defs>
     <mask id="m-draw-mask" maskUnits="userSpaceOnUse" x="285" y="175" width="460" height="430">
       <rect x="285" y="175" width="460" height="430" fill="black"/>
@@ -10,8 +10,8 @@
   </defs>
 
   <g id="logo-geometry" fill="none">
-    <image id="branch-left-original" x="213" y="504" width="303" height="319" href="assets/msm_branch_left_original.png" preserveAspectRatio="none"/>
-    <image id="branch-right-original" x="508" y="504" width="303" height="313" href="assets/msm_branch_right_original.png" preserveAspectRatio="none"/>
-    <image id="m-original" x="313" y="205" width="399" height="361" href="assets/msm_m_original.png" preserveAspectRatio="none" mask="url(#m-draw-mask)"/>
+    <image id="branch-left-original" x="213" y="504" width="303" height="319" href="assets/msa_branch_left_original.png" preserveAspectRatio="none"/>
+    <image id="branch-right-original" x="508" y="504" width="303" height="313" href="assets/msa_branch_right_original.png" preserveAspectRatio="none"/>
+    <image id="m-original" x="313" y="205" width="399" height="361" href="assets/msa_m_original.png" preserveAspectRatio="none" mask="url(#m-draw-mask)"/>
   </g>
 </svg>

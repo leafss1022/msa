@@ -1,8 +1,8 @@
-# MSM Free Logo Motion Spec
+# MSA Free Logo Motion Spec
 
 ## Source
 
-- Input: `/Users/luochuhan/repo/msm-free/logo.png`
+- Input: `/Users/luochuhan/repo/msa-free/logo.png`
 - Source file header: JPEG image data despite `.png` extension
 - Canvas: 1024 x 1024, white background
 - Semantic parts: `m-original`, `branch-left-original`, `branch-right-original`
