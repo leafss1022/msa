@@ -18,3 +18,5 @@ graphify-out/
 
 # Preview files
 .preview
+.cozeproj/reduction
+.codegraph
