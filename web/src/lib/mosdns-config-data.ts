@@ -1,6 +1,6 @@
 export const configYaml = `log:
   level: warn
-  file: "/root/.msm/configs/logs/mosdns.log"
+  file: "/root/.msa/configs/logs/mosdns.log"
 
 
 #跟web ui绑定，不要修改此端口
@@ -27,8 +27,8 @@ include:
 export const fileTree = {
   folders: ["adguard", "cache", "gen", "genblank", "rule", "srs", "sub_config", "unpack", "webinfo"],
   files: [
-    ".msm-mosdns-template-manifest.json",
-    ".msm-mosdns-template-version",
+    ".msa-mosdns-template-manifest.json",
+    ".msa-mosdns-template-version",
     "audit_settings.json",
     "client_ip.txt",
     "config_overrides.json",
