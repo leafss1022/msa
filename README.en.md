@@ -59,6 +59,16 @@ https://github.com/leafss1022/msa/releases/tag/v0.3.9.4
 
 ## Quick Start
 
+### One-click install (recommended)
+
+`ash
+bash <(curl -sSL https://github.com/leafss1022/msa/releases/download/v0.3.9.4/quick-install.sh)
+`
+
+Auto-detects architecture and completes installation. Requires root.
+
+### Manual install
+
 1. Pick the install guide for your platform: Linux, fnOS, Unraid, or Docker.
 2. Open the WebUI after installation. The default URL is `http://<server-ip>:7777`.
 3. Complete the setup wizard. Setup writes system settings, generates MosDNS/Mihomo configs, and persists them in the database.
