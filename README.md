@@ -1,4 +1,4 @@
-# msa
+# MSA
 
 [English README](README.en.md)
 
@@ -31,8 +31,6 @@
 | 平台 | 状态 | 安装文档 | 更新/卸载方式 |
 |---|---|---|---|
 | Linux tarball/systemd | 稳定支持 | [Linux 安装](docs/install/linux.md) | `msa update` / `msa uninstall` |
-| fnOS FPK | 支持 | [fnOS FPK 安装](docs/install/fnos-fpk.md) | fnOS / 飞牛应用中心或 FPK 包管理器 |
-| Unraid PLG | 稳定支持 | [Unraid PLG 安装](docs/install/unraid-plg.md) | Unraid 插件管理页面 |
 | Docker TUN host/macvlan | 实验性，未完全完成 | [Docker 实验部署](docs/docker.md) | Docker / Compose / 容器管理器 |
 
 `msa update` 和 `msa uninstall` 只面向 Linux tarball/systemd 安装。fnOS FPK、Unraid PLG、Docker 请通过各自平台管理器更新或卸载，避免绕过包状态。
@@ -48,10 +46,6 @@ https://github.com/leafss1022/msa/releases/tag/v0.3.9.4
 | 资产 | 下载地址 |
 |---|---|
 | Linux x86_64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.4/msa-linux-amd64.tar.gz` |
-| Linux ARM64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.4/msa-linux-arm64.tar.gz` |
-| fnOS x86 FPK | `https://github.com/leafss1022/msa/releases/download/v0.3.9.4/msa_0.3.9.4_x86.fpk` |
-| fnOS ARM FPK | `https://github.com/leafss1022/msa/releases/download/v0.3.9.4/msa_0.3.9.4_arm.fpk` |
-| Unraid PLG | `https://github.com/leafss1022/msa/releases/download/v0.3.9.4/msa.plg` |
 
 ## 快速开始
 
