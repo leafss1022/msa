@@ -61,12 +61,9 @@ https://github.com/leafss1022/msa/releases/tag/v0.3.9.4
 
 ### One-click install (recommended)
 
-`ash
+\ash
 bash <(curl -sSL https://github.com/leafss1022/msa/releases/download/v0.3.9.4/quick-install.sh)
-```
-
-Auto-detects architecture and completes installation. Requires root.
-
+\\n
 ### Manual install
 
 1. Pick the install guide for your platform: Linux, fnOS, Unraid, or Docker.
