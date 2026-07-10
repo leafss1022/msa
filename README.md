@@ -61,12 +61,9 @@ https://github.com/leafss1022/msa/releases/tag/v0.3.9.4
 
 ### 一键安装（推荐）
 
-`ash
+\ash
 bash <(curl -sSL https://github.com/leafss1022/msa/releases/download/v0.3.9.4/quick-install.sh)
-```
-
-自动检测架构并完成安装。需要 root 权限。
-
+\\n
 ### 手动安装
 
 1. 按你的运行平台选择安装文档：Linux、fnOS、Unraid 或 Docker。
