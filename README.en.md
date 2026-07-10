@@ -63,7 +63,7 @@ https://github.com/leafss1022/msa/releases/tag/v0.3.9.4
 
 `ash
 bash <(curl -sSL https://github.com/leafss1022/msa/releases/download/v0.3.9.4/quick-install.sh)
-`
+```
 
 Auto-detects architecture and completes installation. Requires root.
 
