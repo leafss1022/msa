@@ -63,7 +63,7 @@ https://github.com/leafss1022/msa/releases/tag/v0.3.9.4
 
 `ash
 bash <(curl -sSL https://github.com/leafss1022/msa/releases/download/v0.3.9.4/quick-install.sh)
-`
+```
 
 自动检测架构并完成安装。需要 root 权限。
 
