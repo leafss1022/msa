@@ -2,19 +2,19 @@
 
 本页面适用于普通 Linux 主机上的 `msa-linux-amd64.tar.gz` / `msa-linux-arm64.tar.gz` 安装包。Linux tarball/systemd 是当前推荐的通用安装方式，也是唯一支持 `msa update` 和 `msa uninstall` 的安装方式。
 
-当前版本：`v0.3.9.3`
+当前版本：`v0.3.9.4`
 
 ## 下载
 
 | 架构 | 下载地址 |
 |---|---|
-| x86_64 / amd64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.3/msa-linux-amd64.tar.gz` |
-| ARM64 / aarch64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.3/msa-linux-arm64.tar.gz` |
+| x86_64 / amd64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.4/msa-linux-amd64.tar.gz` |
+| ARM64 / aarch64 | `https://github.com/leafss1022/msa/releases/download/v0.3.9.4/msa-linux-arm64.tar.gz` |
 
 Release 页面：
 
 ```text
-https://github.com/leafss1022/msa/releases/tag/v0.3.9.3
+https://github.com/leafss1022/msa/releases/tag/v0.3.9.4
 ```
 
 ## 安装
@@ -23,20 +23,20 @@ x86_64 / amd64：
 
 ```bash
 curl -L -o msa-linux-amd64.tar.gz \
-  https://github.com/leafss1022/msa/releases/download/v0.3.9.3/msa-linux-amd64.tar.gz
+  https://github.com/leafss1022/msa/releases/download/v0.3.9.4/msa-linux-amd64.tar.gz
 
 tar -xzf msa-linux-amd64.tar.gz -C /tmp
-sudo /tmp/msa-0.3.9.3-linux-amd64/install.sh
+sudo /tmp/msa-0.3.9.4-linux-amd64/install.sh
 ```
 
 ARM64 / aarch64：
 
 ```bash
 curl -L -o msa-linux-arm64.tar.gz \
-  https://github.com/leafss1022/msa/releases/download/v0.3.9.3/msa-linux-arm64.tar.gz
+  https://github.com/leafss1022/msa/releases/download/v0.3.9.4/msa-linux-arm64.tar.gz
 
 tar -xzf msa-linux-arm64.tar.gz -C /tmp
-sudo /tmp/msa-0.3.9.3-linux-arm64/install.sh
+sudo /tmp/msa-0.3.9.4-linux-arm64/install.sh
 ```
 
 安装脚本默认完成这些操作：
@@ -108,7 +108,7 @@ sudo msa update
 sudo ./install.sh
 ```
 
-安装脚本会覆盖二进制并重启服务，默认保留现有数据目录。`msa update` 会优先复用当前安装的真实数据目录、监听 host 和 port，避免更新后启动到空目录。
+安装脚本会覆盖二进制并重启服务，默认保留现有数据目录。`msa update` 会优先复用当前安装的真实数据目录、监听 host 和 port，避免更新后��动到空目录。
 
 ## 卸载
 
