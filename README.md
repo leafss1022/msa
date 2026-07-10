@@ -1,9 +1,5 @@
 # msa
 
-<p align="center">
-  <img src="logo_motion/msm_logo_motion.gif" alt="MSA 动态 Logo" width="320">
-</p>
-
 [English README](README.en.md)
 
 [常见问题 FAQ](docs/faq.md)
