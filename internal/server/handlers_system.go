@@ -718,6 +718,7 @@ func readMemInfo() map[string]uint64 {
 	out := map[string]uint64{"MemTotal": 0, "MemAvailable": 0}
 	b, err := os.ReadFile("/proc/meminfo")
 	if err != nil {
+		out["MemTotal"] = readCgroupMemLimit()
 		return out
 	}
 	for _, line := range strings.Split(string(b), "\n") {
@@ -731,7 +732,32 @@ func readMemInfo() map[string]uint64 {
 			out[key] = v * 1024
 		}
 	}
+	if cgroupLimit := readCgroupMemLimit(); cgroupLimit > 0 && cgroupLimit < out["MemTotal"] {
+		out["MemTotal"] = cgroupLimit
+		if out["MemAvailable"] > cgroupLimit {
+			out["MemAvailable"] = cgroupLimit
+		}
+	}
 	return out
+}
+
+func readCgroupMemLimit() uint64 {
+	if b, err := os.ReadFile("/sys/fs/cgroup/memory.max"); err == nil {
+		value := strings.TrimSpace(string(b))
+		if value == "max" {
+			return 0
+		}
+		v, _ := strconv.ParseUint(value, 10, 64)
+		return v
+	}
+	if b, err := os.ReadFile("/sys/fs/cgroup/memory/memory.limit_in_bytes"); err == nil {
+		value := strings.TrimSpace(string(b))
+		v, _ := strconv.ParseUint(value, 10, 64)
+		if v < 0x7FFFFFFFFFFFF000 {
+			return v
+		}
+	}
+	return 0
 }
 
 func percent(used, total uint64) float64 {
