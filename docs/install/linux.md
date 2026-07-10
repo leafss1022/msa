@@ -6,7 +6,7 @@
 
 ## 一键安装
 
-bash <(curl -sSL https://github.com/leafss1022/msa/releases/download/v0.3.9.4/quick-install.sh)
+curl -fsSL https://github.com/leafss1022/msa/releases/download/v0.3.9.4/quick-install.sh | sudo bash
 
 脚本会自动检测系统架构（amd64 / arm64），下载对应版本并完成安装。需要 root 权限。
 
