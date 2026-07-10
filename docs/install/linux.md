@@ -4,6 +4,14 @@
 
 当前版本：`v0.3.9.4`
 
+## 一键安装
+
+`ash
+bash <(curl -sSL https://github.com/leafss1022/msa/releases/download/v0.3.9.4/quick-install.sh)
+`
+
+脚本会自动检测系统架构（amd64 / arm64），下载对应版本并完成安装。需要 root 权限。
+
 ## 下载
 
 | 架构 | 下载地址 |
