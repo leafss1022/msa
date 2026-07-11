@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Plugin>
+<Name>msa</Name>
+<PluginURL>https://raw.githubusercontent.com/scoltzero/msa/main/msa.plg</PluginURL>
+<Icon>https://raw.githubusercontent.com/scoltzero/msa/main/packaging/unraid/msa.png</Icon>
+<Overview>
+A free and open-source, user-facing all-in-one management tool for DNS and proxy (mihomo / sing-box, in development), packaged for Unraid.
+msa installs a lightweight Utilities page entry plus a self-managed local service. The Unraid plugin page is only for enabling the rc service, setting the listen host/port, choosing the data directory, viewing status, and opening the separate msa WebUI. The full DNS/proxy management interface runs in that WebUI.
+After you complete the in-app setup wizard, msa can run MosDNS (DNS), Mihomo (proxy/TProxy), and the required nftables rules. Online MosDNS/Mihomo/Zashboard core downloads are verified against GitHub Release API asset SHA-256 digests before install; local uploads remain user-supplied files and are not marked as project-verified. Default sample subscriptions/nodes are inert placeholders only. Persistent data lives under /mnt/user/appdata/msa.
+Update and remove msa from the Unraid Plugins page (not via the in-app updater).
+</Overview>
+<Support>https://github.com/scoltzero/msa/issues</Support>
+<Project>https://github.com/scoltzero/msa</Project>
+<Category>Network:Management Tools:System Plugins:</Category>
+<Beta>False</Beta>
+<Date>2026-06-27</Date>
+<Changes>
+### msa 0.3.7
+- Added experimental Docker TUN runtime support with host and IPv4 macvlan container network entries.
+- Docker runtime now defaults to Mihomo TUN; regular Linux, fnOS, and Unraid installs keep the existing nftables transparent-proxy defaults.
+- Added full Docker Compose, macvlan Compose, plain docker-run.sh examples, and bilingual Docker deployment docs.
+- Docker TUN no longer generates host `network.nft`, no longer checks `7877` / `7896`, and disables in-container self-update installation.
+- Added README FAQ entry points, port 53 occupancy FAQ, architecture diagrams, and the English architecture diagram.
+- Added the linux.do community badge, acknowledgements updates, and thanks to Gzh256 for multi-version testing.
+</Changes>
+</Plugin>

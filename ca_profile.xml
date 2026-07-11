@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommunityApplications>
+  <Profile>MSA Free provides an Unraid plugin and standalone WebUI for managing MosDNS, Mihomo, DNS routing, proxy rules, and service state. Support is handled through GitHub Issues.</Profile>
+  <Icon>https://raw.githubusercontent.com/scoltzero/msa/main/packaging/unraid/msa.png</Icon>
+  <WebPage>https://github.com/scoltzero/msa</WebPage>
+  <Support>https://github.com/scoltzero/msa/issues</Support>
+  <Project>https://github.com/scoltzero/msa</Project>
+  <!-- Optional after a forum support thread exists:
+  <Forum>https://forums.unraid.net/...</Forum>
+  -->
+</CommunityApplications>
