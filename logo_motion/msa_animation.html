@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MSA Logo Motion</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #logo-stage {
+      width: 640px;
+      height: 640px;
+    }
+    #logo-stage svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    :root {
+      --p2m-duration: 1800ms;
+    }
+
+    #m-original,
+    #m-draw-stroke,
+    #m-final-mask-fill,
+    #branch-left-original,
+    #branch-right-original {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    #m-original {
+      animation: msa-m-settle var(--p2m-duration) cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    #m-draw-stroke {
+      stroke-dasharray: 1 1;
+      stroke-dashoffset: 0;
+      animation: msa-m-draw var(--p2m-duration) cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    #m-final-mask-fill {
+      animation: msa-m-final-fill var(--p2m-duration) linear both;
+    }
+
+    #branch-left-original {
+      animation: msa-branch-left var(--p2m-duration) cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    #branch-right-original {
+      animation: msa-branch-right var(--p2m-duration) cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes msa-m-settle {
+      0% { opacity: 0; transform: translateY(18px) scale(0.97); }
+      12% { opacity: 1; transform: translateY(14px) scale(0.97); }
+      58% { opacity: 1; transform: translateY(-3px) scale(1.015); }
+      80% { opacity: 1; transform: translateY(1px) scale(0.997); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes msa-m-draw {
+      0%, 10% { stroke-dashoffset: 1; }
+      64%, 100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes msa-m-final-fill {
+      0%, 62% { opacity: 0; }
+      68%, 100% { opacity: 1; }
+    }
+
+    @keyframes msa-branch-left {
+      0%, 42% { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateY(22px) scale(0.98); }
+      70% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(-3px) scale(1.035); }
+      86% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(1px) scale(0.995); }
+      100% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0) scale(1); }
+    }
+
+    @keyframes msa-branch-right {
+      0%, 46% { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateY(22px) scale(0.98); }
+      74% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(-3px) scale(1.035); }
+      90% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(1px) scale(0.995); }
+      100% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0) scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div id="logo-stage">
+    <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+      <defs>
+        <mask id="m-draw-mask" maskUnits="userSpaceOnUse" x="285" y="175" width="460" height="430">
+          <rect x="285" y="175" width="460" height="430" fill="black"/>
+          <path id="m-draw-stroke" pathLength="1" d="M 365 552 C 365 486 365 360 365 278 C 365 238 416 229 437 266 L 508 414 C 530 458 552 458 575 414 L 636 286 C 660 238 700 241 700 284 C 700 356 700 480 700 552" fill="none" stroke="white" stroke-width="165" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 1" stroke-dashoffset="0"/>
+          <rect id="m-final-mask-fill" x="285" y="175" width="460" height="430" fill="white" opacity="1"/>
+        </mask>
+      </defs>
+      <g id="logo-geometry" fill="none">
+        <image id="branch-left-original" x="213" y="504" width="303" height="319" href="msm_branch_left_original.png" preserveAspectRatio="none"/>
+        <image id="branch-right-original" x="508" y="504" width="303" height="313" href="branch_right_A.png" preserveAspectRatio="none"/>
+        <image id="m-original" x="313" y="205" width="399" height="361" href="msm_m_original.png" preserveAspectRatio="none" mask="url(#m-draw-mask)"/>
+      </g>
+    </svg>
+  </div>
+</body>
+</html>
