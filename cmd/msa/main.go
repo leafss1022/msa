@@ -29,7 +29,7 @@ import (
 	"github.com/scoltzero/msa/internal/server"
 )
 
-var version = "0.4.0.1"
+var version = "0.4.0.3"
 
 var (
 	currentEUID                        = os.Geteuid

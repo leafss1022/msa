@@ -3,7 +3,7 @@
 APP_NAME := msa
 DIST := dist
 WEB_EXPORT ?= msa_html_export.tar.gz
-VERSION ?= 0.4.0.1
+VERSION ?= 0.4.0.3
 UNRAID_VERSION ?= $(VERSION)
 GITHUB_REPO ?= scoltzero/msa
 RELEASE_TAG ?= v$(VERSION)
