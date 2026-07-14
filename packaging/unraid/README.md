@@ -1,4 +1,4 @@
-# msa Unraid Plugin
+﻿# msa Unraid Plugin
 
 This directory builds the Unraid plugin artifacts for `msa`.
 
@@ -11,7 +11,7 @@ Generated files:
 Build:
 
 ```bash
-make unraid VERSION=0.3.7 UNRAID_VERSION=0.3.7 GITHUB_REPO=scoltzero/msa RELEASE_TAG=v0.3.7
+make unraid VERSION=0.3.7 UNRAID_VERSION=0.3.7 GITHUB_REPO=leafss1022/msa RELEASE_TAG=v0.3.7
 ```
 
 Publish the generated `.txz` package and `.plg` file to the GitHub release named by `RELEASE_TAG`, then commit the generated root `msa.plg` when you want a branch-based install URL.
@@ -33,13 +33,13 @@ gh release create v0.3.7 \
 Recommended install URL for the v0.3.7 release:
 
 ```text
-https://github.com/scoltzero/msa/releases/download/v0.3.7/msa.plg
+https://github.com/leafss1022/msa/releases/download/v0.3.7/msa.plg
 ```
 
 Branch install URL, only after the generated root `msa.plg` has been committed to that branch:
 
 ```text
-https://raw.githubusercontent.com/scoltzero/msa/<branch>/msa.plg
+https://raw.githubusercontent.com/leafss1022/msa/<branch>/msa.plg
 ```
 
 ## Runtime Behavior
