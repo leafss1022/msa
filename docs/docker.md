@@ -1,33 +1,22 @@
-# Docker TUN 实验部署
+﻿# Docker TUN 瀹為獙閮ㄧ讲
 
 [English version](docker.en.md)
 
-Docker 部署目前仍是实验性能力，尚未作为推荐安装方式。它适合熟悉 Docker、TUN、静态路由和旁路由接入的用户验证当前实现；生产或长期使用优先选择 [Linux tarball/systemd](install/linux.md)、[fnOS FPK](install/fnos-fpk.md) 或 [Unraid PLG](install/unraid-plg.md)。
+Docker 閮ㄧ讲鐩墠浠嶆槸瀹為獙鎬ц兘鍔涳紝灏氭湭浣滀负鎺ㄨ崘瀹夎鏂瑰紡銆傚畠閫傚悎鐔熸倝 Docker銆乀UN銆侀潤鎬佽矾鐢卞拰鏃佽矾鐢辨帴鍏ョ殑鐢ㄦ埛楠岃瘉褰撳墠瀹炵幇锛涚敓浜ф垨闀挎湡浣跨敤浼樺厛閫夋嫨 [Linux tarball/systemd](install/linux.md)銆乕fnOS FPK](install/fnos-fpk.md) 鎴?[Unraid PLG](install/unraid-plg.md)銆?
+褰撳墠鐗堟湰锛歚v0.4.2.0`
 
-当前版本：`v0.4.1.1`
-
-当前 Docker 实验镜像：
-
+褰撳墠 Docker 瀹為獙闀滃儚锛?
 ```text
-ghcr.io/leafss1022/msa:v0.4.1.1
+ghcr.io/leafss1022/msa:v0.4.2.0
 ```
 
-这个实验镜像不会推送到 `latest`。拉取或部署 Docker 实验版时必须显式写出 `v0.4.1.1` tag。
+杩欎釜瀹為獙闀滃儚涓嶄細鎺ㄩ€佸埌 `latest`銆傛媺鍙栨垨閮ㄧ讲 Docker 瀹為獙鐗堟椂蹇呴』鏄惧紡鍐欏嚭 `v0.4.2.0` tag銆?
+## 褰撳墠鐘舵€?
+- Docker 鐗堥粯璁や娇鐢?Mihomo TUN锛屼笉鍐嶇敱 MSA 鍐欏叆瀹夸富鏈?nftables 鎴?policy routing銆?- 鏀寔涓ょ瀹瑰櫒缃戠粶锛歚host-tun` 鍜?`macvlan-tun`銆?- `host-tun` 浣跨敤 Docker 瀹夸富鏈虹綉缁滃懡鍚嶇┖闂达紝閫傚悎娴嬭瘯銆佸涓绘満鑷韩浠ｇ悊锛屾垨宸茬粡鑳介厤缃富璺敱闈欐€佽矾鐢卞拰瀹夸富鏈鸿浆鍙戠殑鏃佽矾鐢辩幆澧冦€?- `macvlan-tun` 璁╁鍣ㄦ嫢鏈夌嫭绔?LAN IPv4锛岄€傚悎 Unraid Dockerman / br0 / 鑷畾涔夌綉缁滃満鏅紝涔熸槸褰撳墠 Docker 缃戝叧閮ㄧ讲鏇存帹鑽愮殑鏂瑰紡銆?- 杩愯鏁版嵁蹇呴』鏄犲皠鍒板涓绘満鐩綍锛涘鍣ㄥ唴鏁版嵁鐩綍鍥哄畾涓?`/opt/msa`锛岄粯璁ょず渚嬫槧灏勫埌瀹夸富鏈?`./msa-data`銆?- 瀹瑰櫒鍐呯鐢?`msa update` 鍜?WebUI 鑷洿鏂板畨瑁咃紱闀滃儚鍗囩骇蹇呴』閫氳繃 Docker / Compose / 瀹瑰櫒绠＄悊鍣ㄥ畬鎴愩€?
+濡傛灉浣犵殑鐩爣鏄ǔ瀹氶儴缃诧紝璇峰厛浣跨敤 Linux銆乫nOS 鎴?Unraid PLG 瀹夎鏂瑰紡銆?
+## 杩愯瑕佹眰
 
-## 当前状态
-
-- Docker 版默认使用 Mihomo TUN，不再由 MSA 写入宿主机 nftables 或 policy routing。
-- 支持两种容器网络：`host-tun` 和 `macvlan-tun`。
-- `host-tun` 使用 Docker 宿主机网络命名空间，适合测试、宿主机自身代理，或已经能配置主路由静态路由和宿主机转发的旁路由环境。
-- `macvlan-tun` 让容器拥有独立 LAN IPv4，适合 Unraid Dockerman / br0 / 自定义网络场景，也是当前 Docker 网关部署更推荐的方式。
-- 运行数据必须映射到宿主机目录；容器内数据目录固定为 `/opt/msa`，默认示例映射到宿主机 `./msa-data`。
-- 容器内禁用 `msa update` 和 WebUI 自更新安装；镜像升级必须通过 Docker / Compose / 容器管理器完成。
-
-如果你的目标是稳定部署，请先使用 Linux、fnOS 或 Unraid PLG 安装方式。
-
-## 运行要求
-
-两种模式都需要 TUN 设备和网络管理权限：
+涓ょ妯″紡閮介渶瑕?TUN 璁惧鍜岀綉缁滅鐞嗘潈闄愶細
 
 ```yaml
 cap_add:
@@ -37,37 +26,32 @@ devices:
   - /dev/net/tun:/dev/net/tun
 ```
 
-Docker 镜像默认设置：
-
+Docker 闀滃儚榛樿璁剧疆锛?
 ```text
 MSA_RUNTIME=docker
 MSA_DOCKER_NETWORK_MODE=host-tun
 MSA_DOCKER_CLEANUP_NETWORK_ON_EXIT=false
 ```
 
-Docker TUN 模式下，Mihomo 配置会启用 `tun.auto-route`、`tun.auto-detect-interface` 和 `tun.route-address`，显式保持 `tun.dns-hijack=[]`、`tun.auto-redirect=false`，并配置 `dns.proxy-server-nameserver`。DNS 分流仍由 MosDNS 负责，Mihomo 只接管 Fake-IP 和必要公网目标。这意味着 MSA 不会写宿主机 `table inet msa`、`fwmark 1 table 100` 或 `ip rule`。如果你把 `host-tun` 当作旁路网关使用，还需要按下文补充宿主机 FakeIP 路由。
-
-数据目录必须持久化映射：
+Docker TUN 妯″紡涓嬶紝Mihomo 閰嶇疆浼氬惎鐢?`tun.auto-route`銆乣tun.auto-detect-interface` 鍜?`tun.route-address`锛屾樉寮忎繚鎸?`tun.dns-hijack=[]`銆乣tun.auto-redirect=false`锛屽苟閰嶇疆 `dns.proxy-server-nameserver`銆侱NS 鍒嗘祦浠嶇敱 MosDNS 璐熻矗锛孧ihomo 鍙帴绠?Fake-IP 鍜屽繀瑕佸叕缃戠洰鏍囥€傝繖鎰忓懗鐫€ MSA 涓嶄細鍐欏涓绘満 `table inet msa`銆乣fwmark 1 table 100` 鎴?`ip rule`銆傚鏋滀綘鎶?`host-tun` 褰撲綔鏃佽矾缃戝叧浣跨敤锛岃繕闇€瑕佹寜涓嬫枃琛ュ厖瀹夸富鏈?FakeIP 璺敱銆?
+鏁版嵁鐩綍蹇呴』鎸佷箙鍖栨槧灏勶細
 
 ```text
-宿主机目录  ->  容器目录
+瀹夸富鏈虹洰褰? ->  瀹瑰櫒鐩綍
 ./msa-data  ->  /opt/msa
 ```
 
-MosDNS、Mihomo、Zashboard 下载文件、数据库、配置、日志和用户上传的 Mihomo 配置都会写入 `/opt/msa`。如果不映射这个目录，容器重建后这些数据会丢失，WebUI 中的组件下载和配置管理也无法可靠工作。
+MosDNS銆丮ihomo銆乑ashboard 涓嬭浇鏂囦欢銆佹暟鎹簱銆侀厤缃€佹棩蹇楀拰鐢ㄦ埛涓婁紶鐨?Mihomo 閰嶇疆閮戒細鍐欏叆 `/opt/msa`銆傚鏋滀笉鏄犲皠杩欎釜鐩綍锛屽鍣ㄩ噸寤哄悗杩欎簺鏁版嵁浼氫涪澶憋紝WebUI 涓殑缁勪欢涓嬭浇鍜岄厤缃鐞嗕篃鏃犳硶鍙潬宸ヤ綔銆?
+## 蹇€熷惎鍔細host TUN
 
-## 快速启动：host TUN
-
-host TUN 使用宿主机 IP 对外提供 WebUI、DNS 和代理服务。
-
+host TUN 浣跨敤瀹夸富鏈?IP 瀵瑰鎻愪緵 WebUI銆丏NS 鍜屼唬鐞嗘湇鍔°€?
 ### Docker Compose
 
-仓库根目录已经提供 `docker-compose.yml`。如果你需要手工创建文件，可以直接复制下面内容保存为 `docker-compose.yml`：
-
+浠撳簱鏍圭洰褰曞凡缁忔彁渚?`docker-compose.yml`銆傚鏋滀綘闇€瑕佹墜宸ュ垱寤烘枃浠讹紝鍙互鐩存帴澶嶅埗涓嬮潰鍐呭淇濆瓨涓?`docker-compose.yml`锛?
 ```yaml
 services:
   msa:
-    image: ghcr.io/leafss1022/msa:v0.4.1.1
+    image: ghcr.io/leafss1022/msa:v0.4.2.0
     container_name: msa
     network_mode: host
     cap_add:
@@ -86,33 +70,30 @@ services:
     stop_grace_period: 30s
 ```
 
-启动：
-
+鍚姩锛?
 ```bash
 mkdir -p msa-data
 docker compose up -d
 ```
 
-默认 compose 文件使用：
+榛樿 compose 鏂囦欢浣跨敤锛?
+- 闀滃儚锛歚ghcr.io/leafss1022/msa:v0.4.2.0`
+- 缃戠粶锛歚host`
+- 鏁版嵁鐩綍锛歚./msa-data:/opt/msa`
+- WebUI锛歚http://<瀹夸富鏈篒P>:7777`
+- 杩愯鏍囪瘑锛歚MSA_RUNTIME=docker`
+- Docker 缃戠粶妯″紡锛歚MSA_DOCKER_NETWORK_MODE=host-tun`
 
-- 镜像：`ghcr.io/leafss1022/msa:v0.4.1.1`
-- 网络：`host`
-- 数据目录：`./msa-data:/opt/msa`
-- WebUI：`http://<宿主机IP>:7777`
-- 运行标识：`MSA_RUNTIME=docker`
-- Docker 网络模式：`MSA_DOCKER_NETWORK_MODE=host-tun`
+### 鏅€?Docker 鑴氭湰
 
-### 普通 Docker 脚本
-
-不适合使用 Docker Compose 的机器可以直接运行：
+涓嶉€傚悎浣跨敤 Docker Compose 鐨勬満鍣ㄥ彲浠ョ洿鎺ヨ繍琛岋細
 
 ```bash
 mkdir -p msa-data
 ./docker-run.sh
 ```
 
-等价的核心参数是：
-
+绛変环鐨勬牳蹇冨弬鏁版槸锛?
 ```bash
 docker run -d \
   --name msa \
@@ -126,21 +107,19 @@ docker run -d \
   -e MSA_DOCKER_NETWORK_MODE=host-tun \
   -e MSA_DATA_DIR=/opt/msa \
   -v "$PWD/msa-data:/opt/msa" \
-  ghcr.io/leafss1022/msa:v0.4.1.1
+  ghcr.io/leafss1022/msa:v0.4.2.0
 ```
 
-## 快速启动：macvlan TUN
+## 蹇€熷惎鍔細macvlan TUN
 
-macvlan TUN 给容器分配独立 LAN IPv4。路由器侧 DHCP DNS 和 FakeIP 静态路由都应指向这个容器 IPv4，而不是宿主机 IP。
-
+macvlan TUN 缁欏鍣ㄥ垎閰嶇嫭绔?LAN IPv4銆傝矾鐢卞櫒渚?DHCP DNS 鍜?FakeIP 闈欐€佽矾鐢遍兘搴旀寚鍚戣繖涓鍣?IPv4锛岃€屼笉鏄涓绘満 IP銆?
 ### Docker Compose
 
-仓库根目录已经提供 `docker-compose.macvlan.yml`。如果你需要手工创建文件，可以直接复制下面内容保存为 `docker-compose.macvlan.yml`：
-
+浠撳簱鏍圭洰褰曞凡缁忔彁渚?`docker-compose.macvlan.yml`銆傚鏋滀綘闇€瑕佹墜宸ュ垱寤烘枃浠讹紝鍙互鐩存帴澶嶅埗涓嬮潰鍐呭淇濆瓨涓?`docker-compose.macvlan.yml`锛?
 ```yaml
 services:
   msa:
-    image: ${MSA_IMAGE:-ghcr.io/leafss1022/msa:v0.4.1.1}
+    image: ${MSA_IMAGE:-ghcr.io/leafss1022/msa:v0.4.2.0}
     container_name: ${MSA_CONTAINER_NAME:-msa}
     cap_add:
       - NET_ADMIN
@@ -172,16 +151,15 @@ networks:
           gateway: ${MSA_DOCKER_GATEWAY:?set MSA_DOCKER_GATEWAY}
 ```
 
-复制示例环境变量并按你的 LAN 修改：
-
+澶嶅埗绀轰緥鐜鍙橀噺骞舵寜浣犵殑 LAN 淇敼锛?
 ```bash
 cp docker.env.example .env
 ```
 
-也可以直接复制下面这个 macvlan compose `.env` 示例保存为 `.env` 后修改：
+涔熷彲浠ョ洿鎺ュ鍒朵笅闈㈣繖涓?macvlan compose `.env` 绀轰緥淇濆瓨涓?`.env` 鍚庝慨鏀癸細
 
 ```text
-MSA_IMAGE=ghcr.io/leafss1022/msa:v0.4.1.1
+MSA_IMAGE=ghcr.io/leafss1022/msa:v0.4.2.0
 MSA_CONTAINER_NAME=msa
 MSA_DOCKER_DATA_DIR=./msa-data
 MSA_DOCKER_NETWORK_NAME=msa-macvlan
@@ -191,16 +169,14 @@ MSA_DOCKER_GATEWAY=192.168.1.1
 MSA_DOCKER_IPV4_ADDRESS=192.168.1.10
 ```
 
-macvlan 模式至少需要按你的 LAN 修改 `MSA_DOCKER_PARENT_IFACE`、`MSA_DOCKER_SUBNET`、`MSA_DOCKER_GATEWAY` 和 `MSA_DOCKER_IPV4_ADDRESS`。
-
-启动：
-
+macvlan 妯″紡鑷冲皯闇€瑕佹寜浣犵殑 LAN 淇敼 `MSA_DOCKER_PARENT_IFACE`銆乣MSA_DOCKER_SUBNET`銆乣MSA_DOCKER_GATEWAY` 鍜?`MSA_DOCKER_IPV4_ADDRESS`銆?
+鍚姩锛?
 ```bash
 mkdir -p msa-data
 docker compose -f docker-compose.macvlan.yml up -d
 ```
 
-### 普通 Docker 脚本
+### 鏅€?Docker 鑴氭湰
 
 ```bash
 MSA_DOCKER_NETWORK_MODE=macvlan-tun \
@@ -211,74 +187,55 @@ MSA_DOCKER_IPV4_ADDRESS=192.168.1.10 \
 ./docker-run.sh
 ```
 
-脚本会在 `msa-macvlan` 网络不存在时创建它。可用 `MSA_DOCKER_NETWORK_NAME` 覆盖网络名。
-
+鑴氭湰浼氬湪 `msa-macvlan` 缃戠粶涓嶅瓨鍦ㄦ椂鍒涘缓瀹冦€傚彲鐢?`MSA_DOCKER_NETWORK_NAME` 瑕嗙洊缃戠粶鍚嶃€?
 ## Unraid Dockerman IPv4 macvlan
 
-首版按 Unraid Dockerman 手工配置支持，不提供 Community Applications 容器模板。
-
-1. 在 Unraid Docker 设置中启用自定义网络，并选择 `macvlan` 或你当前系统推荐的自定义网络实现。
-2. 新建容器，镜像填写 `ghcr.io/leafss1022/msa:v0.4.1.1`。
-3. Network Type 选择自定义 LAN 网络，例如 `br0`。
-4. Fixed IP address 填写一个未被 DHCP 分配的静态 IPv4，例如 `192.168.1.10`。
-5. Extra Parameters 或高级参数添加：
+棣栫増鎸?Unraid Dockerman 鎵嬪伐閰嶇疆鏀寔锛屼笉鎻愪緵 Community Applications 瀹瑰櫒妯℃澘銆?
+1. 鍦?Unraid Docker 璁剧疆涓惎鐢ㄨ嚜瀹氫箟缃戠粶锛屽苟閫夋嫨 `macvlan` 鎴栦綘褰撳墠绯荤粺鎺ㄨ崘鐨勮嚜瀹氫箟缃戠粶瀹炵幇銆?2. 鏂板缓瀹瑰櫒锛岄暅鍍忓～鍐?`ghcr.io/leafss1022/msa:v0.4.2.0`銆?3. Network Type 閫夋嫨鑷畾涔?LAN 缃戠粶锛屼緥濡?`br0`銆?4. Fixed IP address 濉啓涓€涓湭琚?DHCP 鍒嗛厤鐨勯潤鎬?IPv4锛屼緥濡?`192.168.1.10`銆?5. Extra Parameters 鎴栭珮绾у弬鏁版坊鍔狅細
 
 ```text
 --cap-add NET_ADMIN --cap-add NET_RAW --device /dev/net/tun:/dev/net/tun
 ```
 
-6. 添加环境变量：
-
-| 变量 | 值 |
+6. 娣诲姞鐜鍙橀噺锛?
+| 鍙橀噺 | 鍊?|
 |---|---|
 | `MSA_RUNTIME` | `docker` |
 | `MSA_DOCKER_NETWORK_MODE` | `macvlan-tun` |
 | `MSA_DATA_DIR` | `/opt/msa` |
 
-7. 添加路径映射：
-
-| 宿主机路径 | 容器路径 |
+7. 娣诲姞璺緞鏄犲皠锛?
+| 瀹夸富鏈鸿矾寰?| 瀹瑰櫒璺緞 |
 |---|---|
 | `/mnt/user/appdata/msa-docker` | `/opt/msa` |
 
-WebUI 地址为 `http://<容器IPv4>:7777`。
+WebUI 鍦板潃涓?`http://<瀹瑰櫒IPv4>:7777`銆?
+## 璺敱鎺ュ叆
 
-## 路由接入
+棣栨鎵撳紑 WebUI 鍚庡畬鎴愬垵濮嬪寲鍚戝銆侱ocker runtime 涓嬪垵濮嬪寲椤甸粯璁ら€夋嫨 TUN 妯″紡銆?
+璺敱鍣ㄤ晶闇€瑕侊細
 
-首次打开 WebUI 后完成初始化向导。Docker runtime 下初始化页默认选择 TUN 模式。
-
-路由器侧需要：
-
-1. DHCP DNS 指向 MSA 地址。
-2. FakeIP 静态路由指向同一个 MSA 地址。
-
-MSA 地址按网络模式选择：
-
-| Docker 模式 | 路由器应指向 |
+1. DHCP DNS 鎸囧悜 MSA 鍦板潃銆?2. FakeIP 闈欐€佽矾鐢辨寚鍚戝悓涓€涓?MSA 鍦板潃銆?
+MSA 鍦板潃鎸夌綉缁滄ā寮忛€夋嫨锛?
+| Docker 妯″紡 | 璺敱鍣ㄥ簲鎸囧悜 |
 |---|---|
-| `host-tun` | Docker 宿主机 LAN IP |
-| `macvlan-tun` | 容器独立 LAN IPv4；启用 IPv6 时还需要容器可路由 IPv6 |
+| `host-tun` | Docker 瀹夸富鏈?LAN IP |
+| `macvlan-tun` | 瀹瑰櫒鐙珛 LAN IPv4锛涘惎鐢?IPv6 鏃惰繕闇€瑕佸鍣ㄥ彲璺敱 IPv6 |
 
-默认 FakeIP 网段：
-
-| 类型 | 网段 |
+榛樿 FakeIP 缃戞锛?
+| 绫诲瀷 | 缃戞 |
 |---|---|
 | IPv4 | `28.0.0.0/8` |
 | IPv6 | `f2b0::/18` |
 
-macvlan 默认验收仍以 IPv4 为主。若启用 IPv6，需要容器拥有可被主路由访问的 IPv6，并在主路由上把 `f2b0::/18` 指向这个容器 IPv6。完整教程见 [路由器接入总览](guide/zh/router-integration.md)。
-
-### host-tun FakeIP 路由持久化
-
-`host-tun` 共享 Docker 宿主机网络命名空间。主路由把 `28.0.0.0/8` 静态路由指向 Docker 宿主机后，宿主机还必须把完整 IPv4 FakeIP 网段交给 Mihomo TUN；启用 IPv6 时，`f2b0::/18` 也需要同样指向 Mihomo TUN。部分环境里 Mihomo 只会给 `mihomo` 接口生成 `28.0.0.0/30`，这只能覆盖 `28.0.0.0` 到 `28.0.0.3`，客户端拿到 `28.0.0.13` 这类 FakeIP 时就不会进入 TUN。
-
-新版本会在 Docker `host-tun` + Mihomo TUN 模式下，在 Mihomo 启动成功后自动补齐 FakeIP IPv4 路由；如果配置中启用了 IPv6，也会自动补齐 FakeIP IPv6 路由。程序还会尝试关闭默认出口网卡的 `rp_filter`。如果宿主机 `/proc/sys` 只读、系统防火墙重放了路由规则，或你正在排查旧版本问题，可以继续使用下面的手工命令作为 fallback。程序不会自动重启 `firewalld`、`nftables` 或 `ufw`。
-
-先在 Docker 宿主机上临时验证：
-
+macvlan 榛樿楠屾敹浠嶄互 IPv4 涓轰富銆傝嫢鍚敤 IPv6锛岄渶瑕佸鍣ㄦ嫢鏈夊彲琚富璺敱璁块棶鐨?IPv6锛屽苟鍦ㄤ富璺敱涓婃妸 `f2b0::/18` 鎸囧悜杩欎釜瀹瑰櫒 IPv6銆傚畬鏁存暀绋嬭 [璺敱鍣ㄦ帴鍏ユ€昏](guide/zh/router-integration.md)銆?
+### host-tun FakeIP 璺敱鎸佷箙鍖?
+`host-tun` 鍏变韩 Docker 瀹夸富鏈虹綉缁滃懡鍚嶇┖闂淬€備富璺敱鎶?`28.0.0.0/8` 闈欐€佽矾鐢辨寚鍚?Docker 瀹夸富鏈哄悗锛屽涓绘満杩樺繀椤绘妸瀹屾暣 IPv4 FakeIP 缃戞浜ょ粰 Mihomo TUN锛涘惎鐢?IPv6 鏃讹紝`f2b0::/18` 涔熼渶瑕佸悓鏍锋寚鍚?Mihomo TUN銆傞儴鍒嗙幆澧冮噷 Mihomo 鍙細缁?`mihomo` 鎺ュ彛鐢熸垚 `28.0.0.0/30`锛岃繖鍙兘瑕嗙洊 `28.0.0.0` 鍒?`28.0.0.3`锛屽鎴风鎷垮埌 `28.0.0.13` 杩欑被 FakeIP 鏃跺氨涓嶄細杩涘叆 TUN銆?
+鏂扮増鏈細鍦?Docker `host-tun` + Mihomo TUN 妯″紡涓嬶紝鍦?Mihomo 鍚姩鎴愬姛鍚庤嚜鍔ㄨˉ榻?FakeIP IPv4 璺敱锛涘鏋滈厤缃腑鍚敤浜?IPv6锛屼篃浼氳嚜鍔ㄨˉ榻?FakeIP IPv6 璺敱銆傜▼搴忚繕浼氬皾璇曞叧闂粯璁ゅ嚭鍙ｇ綉鍗＄殑 `rp_filter`銆傚鏋滃涓绘満 `/proc/sys` 鍙銆佺郴缁熼槻鐏閲嶆斁浜嗚矾鐢辫鍒欙紝鎴栦綘姝ｅ湪鎺掓煡鏃х増鏈棶棰橈紝鍙互缁х画浣跨敤涓嬮潰鐨勬墜宸ュ懡浠や綔涓?fallback銆傜▼搴忎笉浼氳嚜鍔ㄩ噸鍚?`firewalld`銆乣nftables` 鎴?`ufw`銆?
+鍏堝湪 Docker 瀹夸富鏈轰笂涓存椂楠岃瘉锛?
 ```bash
 sudo ip route replace 28.0.0.0/8 dev mihomo src 28.0.0.1
-# 如果启用了 IPv6:
+# 濡傛灉鍚敤浜?IPv6:
 sudo ip -6 route replace f2b0::/18 dev mihomo src f2b0::1
 
 IFACE="$(ip -4 route show default | awk '/default/ {print $5; exit}')"
@@ -297,25 +254,22 @@ fi
 '
 ```
 
-确认 FakeIP 已经走 `mihomo`：
-
+纭 FakeIP 宸茬粡璧?`mihomo`锛?
 ```bash
 ip route get 28.0.0.13
-# 如果启用了 IPv6:
+# 濡傛灉鍚敤浜?IPv6:
 ip -6 route get f2b0::13
 cat "/proc/sys/net/ipv4/conf/$IFACE/rp_filter"
 ```
 
-期望看到：
-
+鏈熸湜鐪嬪埌锛?
 ```text
 28.0.0.13 dev mihomo src 28.0.0.1
 f2b0::13 dev mihomo src f2b0::1
 0
 ```
 
-临时命令在容器、Mihomo 或宿主机重启后可能丢失。需要持久化时，在 Docker 宿主机上创建 systemd 定时任务。它会定期检查 `mihomo` 接口是否存在，存在时补齐 FakeIP 路由并关闭出口网卡 `rp_filter`。如果启用了 IPv6，把脚本里的 `ENABLE_IPV6=0` 改为 `ENABLE_IPV6=1`：
-
+涓存椂鍛戒护鍦ㄥ鍣ㄣ€丮ihomo 鎴栧涓绘満閲嶅惎鍚庡彲鑳戒涪澶便€傞渶瑕佹寔涔呭寲鏃讹紝鍦?Docker 瀹夸富鏈轰笂鍒涘缓 systemd 瀹氭椂浠诲姟銆傚畠浼氬畾鏈熸鏌?`mihomo` 鎺ュ彛鏄惁瀛樺湪锛屽瓨鍦ㄦ椂琛ラ綈 FakeIP 璺敱骞跺叧闂嚭鍙ｇ綉鍗?`rp_filter`銆傚鏋滃惎鐢ㄤ簡 IPv6锛屾妸鑴氭湰閲岀殑 `ENABLE_IPV6=0` 鏀逛负 `ENABLE_IPV6=1`锛?
 ```bash
 sudo tee /usr/local/sbin/msa-host-tun-route >/dev/null <<'EOF'
 #!/bin/sh
@@ -366,7 +320,7 @@ sudo systemctl enable --now msa-host-tun-route.timer
 sudo systemctl start msa-host-tun-route.service
 ```
 
-防呆：如果你的系统防火墙服务会缓存或重放转发规则，安装持久化任务后手动重启当前正在使用的防火墙服务：
+闃插憜锛氬鏋滀綘鐨勭郴缁熼槻鐏鏈嶅姟浼氱紦瀛樻垨閲嶆斁杞彂瑙勫垯锛屽畨瑁呮寔涔呭寲浠诲姟鍚庢墜鍔ㄩ噸鍚綋鍓嶆鍦ㄤ娇鐢ㄧ殑闃茬伀澧欐湇鍔★細
 
 ```bash
 sudo sh -c '
@@ -382,47 +336,44 @@ fi
 '
 ```
 
-## 脚本变量
+## 鑴氭湰鍙橀噺
 
-`docker-run.sh` 支持：
-
-| 变量 | 默认值 | 用途 |
+`docker-run.sh` 鏀寔锛?
+| 鍙橀噺 | 榛樿鍊?| 鐢ㄩ€?|
 |---|---|---|
-| `MSA_IMAGE` | `ghcr.io/leafss1022/msa:v0.4.1.1` | 容器镜像 |
-| `MSA_CONTAINER_NAME` | `msa` | 容器名称 |
-| `MSA_DOCKER_DATA_DIR` | `$PWD/msa-data` | 宿主机数据目录 |
-| `MSA_DOCKER_NETWORK_MODE` | `host-tun` | `host-tun` 或 `macvlan-tun` |
-| `MSA_DOCKER_NETWORK_NAME` | `msa-macvlan` | macvlan Docker network 名称 |
-| `MSA_DOCKER_PARENT_IFACE` | 无 | macvlan 父接口 |
-| `MSA_DOCKER_SUBNET` | 无 | macvlan IPv4 子网 |
-| `MSA_DOCKER_GATEWAY` | 无 | macvlan IPv4 网关 |
-| `MSA_DOCKER_IPV4_ADDRESS` | 无 | 容器静态 IPv4 |
+| `MSA_IMAGE` | `ghcr.io/leafss1022/msa:v0.4.2.0` | 瀹瑰櫒闀滃儚 |
+| `MSA_CONTAINER_NAME` | `msa` | 瀹瑰櫒鍚嶇О |
+| `MSA_DOCKER_DATA_DIR` | `$PWD/msa-data` | 瀹夸富鏈烘暟鎹洰褰?|
+| `MSA_DOCKER_NETWORK_MODE` | `host-tun` | `host-tun` 鎴?`macvlan-tun` |
+| `MSA_DOCKER_NETWORK_NAME` | `msa-macvlan` | macvlan Docker network 鍚嶇О |
+| `MSA_DOCKER_PARENT_IFACE` | 鏃?| macvlan 鐖舵帴鍙?|
+| `MSA_DOCKER_SUBNET` | 鏃?| macvlan IPv4 瀛愮綉 |
+| `MSA_DOCKER_GATEWAY` | 鏃?| macvlan IPv4 缃戝叧 |
+| `MSA_DOCKER_IPV4_ADDRESS` | 鏃?| 瀹瑰櫒闈欐€?IPv4 |
 
-如果同名容器已经存在，先停止并删除旧容器：
-
+濡傛灉鍚屽悕瀹瑰櫒宸茬粡瀛樺湪锛屽厛鍋滄骞跺垹闄ゆ棫瀹瑰櫒锛?
 ```bash
 docker stop msa
 docker rm msa
 ```
 
-## 常见问题
+## 甯歌闂
 
-### LXC / Proxmox 提示 `/dev/net/tun` 不存在
-
-如果部署时报错：
+### LXC / Proxmox 鎻愮ず `/dev/net/tun` 涓嶅瓨鍦?
+濡傛灉閮ㄧ讲鏃舵姤閿欙細
 
 ```text
 error gathering device information while adding custom device "/dev/net/tun": no such file or directory
 ```
 
-说明 Docker daemon 所在的运行环境没有 `/dev/net/tun`。如果 Docker 跑在 LXC 里，需要在 LXC 容器内检查：
+璇存槑 Docker daemon 鎵€鍦ㄧ殑杩愯鐜娌℃湁 `/dev/net/tun`銆傚鏋?Docker 璺戝湪 LXC 閲岋紝闇€瑕佸湪 LXC 瀹瑰櫒鍐呮鏌ワ細
 
 ```bash
 ls -l /dev/net/tun
 cat /dev/net/tun
 ```
 
-正常情况下，`cat /dev/net/tun` 应返回类似 `File descriptor in bad state`。如果文件不存在，需要在外层宿主机加载并透传 TUN，例如 Proxmox LXC 可参考：
+姝ｅ父鎯呭喌涓嬶紝`cat /dev/net/tun` 搴旇繑鍥炵被浼?`File descriptor in bad state`銆傚鏋滄枃浠朵笉瀛樺湪锛岄渶瑕佸湪澶栧眰瀹夸富鏈哄姞杞藉苟閫忎紶 TUN锛屼緥濡?Proxmox LXC 鍙弬鑰冿細
 
 ```bash
 modprobe tun
@@ -434,46 +385,33 @@ lxc.cgroup2.devices.allow: c 10:200 rwm
 lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
 ```
 
-修改 LXC 配置后重启容器。不同平台的 LXC 权限模型不完全一样，必要时请使用 privileged LXC 或 VM 测试。
+淇敼 LXC 閰嶇疆鍚庨噸鍚鍣ㄣ€備笉鍚屽钩鍙扮殑 LXC 鏉冮檺妯″瀷涓嶅畬鍏ㄤ竴鏍凤紝蹇呰鏃惰浣跨敤 privileged LXC 鎴?VM 娴嬭瘯銆?
+### v0.3.7 Docker TUN 鍑虹幇 DNS / Fake-IP 杩炴帴寮傚父
 
-### v0.3.7 Docker TUN 出现 DNS / Fake-IP 连接异常
+`v0.3.7` 鐨?Docker TUN 榛樿閰嶇疆瀛樺湪缂洪櫡锛歁ihomo 鍙兘鎶婅妭鐐规湇鍔″櫒鍩熷悕瑙ｆ瀽鎴?`28.0.0.x` 杩欑被 Fake-IP锛岄殢鍚庢嫧鍙峰け璐ワ紱鏃ュ織閲屼篃鍙兘鍑虹幇澶ч噺 `127.0.0.1:8888 connection refused` 鎴栬妭鐐瑰煙鍚嶈繛鎺ヨ秴鏃躲€?
+淇鐗堟湰浼氱粺涓€ Linux TUN 鐢熸垚閫昏緫锛?
+- `tun.stack` 浣跨敤 `system`銆?- `tun.dns-hijack` 淇濇寔绌烘暟缁勶紝鐢?MosDNS 缁х画璐熻矗 DNS 鍒嗘祦銆?- `tun.route-address` 鍖呭惈 Fake-IP 缃戞鍜屽繀瑕佸叕缃戠洰鏍囥€?- `tun.route-exclude-address` 鎺掗櫎 LAN銆乴oopback銆乴ink-local 鍜屽父瑙佸浗鍐?DNS銆?- `dns.proxy-server-nameserver` 浣跨敤 `223.5.5.5`銆乣119.29.29.29`锛岄伩鍏嶈妭鐐规湇鍔″櫒鍩熷悕琚?Fake-IP 姹℃煋銆?
+鍗囩骇鍒颁慨澶嶇増鏈悗锛屽鏋滀綘浠嶄娇鐢ㄧ敓鎴愰厤缃ā寮忥紝MSA 浼氬湪鍚姩鏃惰嚜鍔ㄤ慨姝ｆ棫鐨?TUN / DNS 閰嶇疆鍧椼€傝嫢浣犲凡缁忓垏鎹㈠埌 Mihomo 鑷畾涔夐厤缃ā寮忥紝MSA 涓嶄細鑷姩瑕嗙洊浣犵殑鏂囦欢锛岃鎸変笂闈㈢殑瀛楁鎵嬪姩璋冩暣锛屾垨鍦?WebUI 涓仮澶嶄负鐢熸垚閰嶇疆鍚庨噸鏂扮敓鎴愩€?
+### macvlan 鎻愮ず `invalid subinterface vlan name`
 
-`v0.3.7` 的 Docker TUN 默认配置存在缺陷：Mihomo 可能把节点服务器域名解析成 `28.0.0.x` 这类 Fake-IP，随后拨号失败；日志里也可能出现大量 `127.0.0.1:8888 connection refused` 或节点域名连接超时。
-
-修复版本会统一 Linux TUN 生成逻辑：
-
-- `tun.stack` 使用 `system`。
-- `tun.dns-hijack` 保持空数组，由 MosDNS 继续负责 DNS 分流。
-- `tun.route-address` 包含 Fake-IP 网段和必要公网目标。
-- `tun.route-exclude-address` 排除 LAN、loopback、link-local 和常见国内 DNS。
-- `dns.proxy-server-nameserver` 使用 `223.5.5.5`、`119.29.29.29`，避免节点服务器域名被 Fake-IP 污染。
-
-升级到修复版本后，如果你仍使用生成配置模式，MSA 会在启动时自动修正旧的 TUN / DNS 配置块。若你已经切换到 Mihomo 自定义配置模式，MSA 不会自动覆盖你的文件，请按上面的字段手动调整，或在 WebUI 中恢复为生成配置后重新生成。
-
-### macvlan 提示 `invalid subinterface vlan name`
-
-如果部署时报错类似：
+濡傛灉閮ㄧ讲鏃舵姤閿欑被浼硷細
 
 ```text
 invalid subinterface vlan name MSA_DOCKER_PARENT_IFACE:eth0, example formatting is eth0.10
 ```
 
-说明 Docker 收到的 macvlan `parent` 不是实际网卡名。`parent` 必须是 Docker 所在宿主环境中的真实接口，例如 `eth0`、`ens18`、`br0` 或 VLAN 子接口 `eth0.10`。
-
-`.env` 文件必须使用等号写法：
-
+璇存槑 Docker 鏀跺埌鐨?macvlan `parent` 涓嶆槸瀹為檯缃戝崱鍚嶃€俙parent` 蹇呴』鏄?Docker 鎵€鍦ㄥ涓荤幆澧冧腑鐨勭湡瀹炴帴鍙ｏ紝渚嬪 `eth0`銆乣ens18`銆乣br0` 鎴?VLAN 瀛愭帴鍙?`eth0.10`銆?
+`.env` 鏂囦欢蹇呴』浣跨敤绛夊彿鍐欐硶锛?
 ```text
 MSA_DOCKER_PARENT_IFACE=eth0
 ```
 
-不要写成：
-
+涓嶈鍐欐垚锛?
 ```text
 MSA_DOCKER_PARENT_IFACE:eth0
 ```
 
-在 Portainer Stack 里，请把 `MSA_DOCKER_PARENT_IFACE` 作为环境变量名、`eth0` 作为值填写，不要把 `MSA_DOCKER_PARENT_IFACE:eth0` 当成一个完整值。可以先用下面命令确认 compose 展开结果：
-
+鍦?Portainer Stack 閲岋紝璇锋妸 `MSA_DOCKER_PARENT_IFACE` 浣滀负鐜鍙橀噺鍚嶃€乣eth0` 浣滀负鍊煎～鍐欙紝涓嶈鎶?`MSA_DOCKER_PARENT_IFACE:eth0` 褰撴垚涓€涓畬鏁村€笺€傚彲浠ュ厛鐢ㄤ笅闈㈠懡浠ょ‘璁?compose 灞曞紑缁撴灉锛?
 ```bash
 MSA_DOCKER_PARENT_IFACE=eth0 \
 MSA_DOCKER_SUBNET=192.168.1.0/24 \
@@ -482,42 +420,35 @@ MSA_DOCKER_IPV4_ADDRESS=192.168.1.10 \
 docker compose -f docker-compose.macvlan.yml config
 ```
 
-输出中应能看到：
+杈撳嚭涓簲鑳界湅鍒帮細
 
 ```yaml
 driver_opts:
   parent: eth0
 ```
 
-## 更新和卸载
-
-Docker 容器内禁用 `msa update` 和 WebUI 自更新安装。镜像升级应通过拉取新镜像并重建容器完成。
-
-Docker Compose：
-
+## 鏇存柊鍜屽嵏杞?
+Docker 瀹瑰櫒鍐呯鐢?`msa update` 鍜?WebUI 鑷洿鏂板畨瑁呫€傞暅鍍忓崌绾у簲閫氳繃鎷夊彇鏂伴暅鍍忓苟閲嶅缓瀹瑰櫒瀹屾垚銆?
+Docker Compose锛?
 ```bash
 docker compose pull
 docker compose up -d
 ```
 
-普通 Docker：
-
+鏅€?Docker锛?
 ```bash
-docker pull ghcr.io/leafss1022/msa:v0.4.1.1
+docker pull ghcr.io/leafss1022/msa:v0.4.2.0
 docker stop msa
 docker rm msa
 ./docker-run.sh
 ```
 
-卸载时通过 Docker / Compose / 容器管理器删除容器。默认数据目录在宿主机当前目录的 `./msa-data`，需要彻底清理时再手动删除该目录。
+鍗歌浇鏃堕€氳繃 Docker / Compose / 瀹瑰櫒绠＄悊鍣ㄥ垹闄ゅ鍣ㄣ€傞粯璁ゆ暟鎹洰褰曞湪瀹夸富鏈哄綋鍓嶇洰褰曠殑 `./msa-data`锛岄渶瑕佸交搴曟竻鐞嗘椂鍐嶆墜鍔ㄥ垹闄よ鐩綍銆?
+MosDNS銆丮ihomo銆乑ashboard 鐨勭粍浠舵洿鏂颁粛鍙湪 WebUI 涓娇鐢ㄣ€?
+## 甯歌绔彛
 
-MosDNS、Mihomo、Zashboard 的组件更新仍可在 WebUI 中使用。
-
-## 常见端口
-
-Docker TUN 默认不使用 TProxy/Redirect 端口。
-
-| 端口 | 用途 |
+Docker TUN 榛樿涓嶄娇鐢?TProxy/Redirect 绔彛銆?
+| 绔彛 | 鐢ㄩ€?|
 |---|---|
 | `7777` | MSA WebUI |
 | `53/tcp,udp` | MosDNS |
