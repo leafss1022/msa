@@ -46,16 +46,16 @@
 GitHub Release：
 
 ```text
-https://github.com/leafss1022/msa/releases/tag/v0.4.1.1
+https://github.com/leafss1022/msa/releases/tag/v0.4.1.2
 ```
 
 | 资产 | 下载地址 |
 |---|---|
-| Linux x86_64 | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa-linux-amd64.tar.gz` |
-| Linux ARM64 | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa-linux-arm64.tar.gz` |
-| fnOS x86 FPK | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa_0.4.1.1_x86.fpk` |
-| fnOS ARM FPK | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa_0.4.1.1_arm.fpk` |
-| Unraid PLG | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa.plg` |
+| Linux x86_64 | `https://github.com/leafss1022/msa/releases/download/v0.4.0.3/msa-linux-amd64.tar.gz` |
+| Linux ARM64 | `https://github.com/leafss1022/msa/releases/download/v0.4.0.3/msa-linux-arm64.tar.gz` |
+| fnOS x86 FPK | `https://github.com/leafss1022/msa/releases/download/v0.4.0.3/msa_0.4.1.1_x86.fpk` |
+| fnOS ARM FPK | `https://github.com/leafss1022/msa/releases/download/v0.4.0.3/msa_0.4.1.1_arm.fpk` |
+| Unraid PLG | `https://github.com/leafss1022/msa/releases/download/v0.4.0.3/msa.plg` |
 
 ## 快速开始
 
