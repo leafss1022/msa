@@ -1,48 +1,29 @@
-# msa — Unraid Community Applications 上架资料
+﻿# msa 鈥?Unraid Community Applications 涓婃灦璧勬枡
 
-本目录是把 msa 提交到 Unraid 官方 **Community Applications (CA)** 商店所需的资料与说明。
-直链安装（把 `.plg` URL 粘进 *Plugins → Install Plugin*）**不需要**这些文件；只有要进 CA 商店、让用户搜索安装时才需要。
-
-## 已经备好的文件
-
-| 文件 | 作用 |
+鏈洰褰曟槸鎶?msa 鎻愪氦鍒?Unraid 瀹樻柟 **Community Applications (CA)** 鍟嗗簵鎵€闇€鐨勮祫鏂欎笌璇存槑銆?鐩撮摼瀹夎锛堟妸 `.plg` URL 绮樿繘 *Plugins 鈫?Install Plugin*锛?*涓嶉渶瑕?*杩欎簺鏂囦欢锛涘彧鏈夎杩?CA 鍟嗗簵銆佽鐢ㄦ埛鎼滅储瀹夎鏃舵墠闇€瑕併€?
+## 宸茬粡澶囧ソ鐨勬枃浠?
+| 鏂囦欢 | 浣滅敤 |
 |------|------|
-| `../../../LICENSE` | 仓库根的 **GPL-3.0** 全文（CA 要求 OSI 认可协议） |
-| `../../../ca_profile.xml` | 仓库根的 **维护者资料**（`<CommunityApplications>`：`Profile/Icon/WebPage`） |
-| `ca/msa.xml` | **CA 插件模板**（根元素 `<Plugin>`：`Name/PluginURL/Icon/Overview/Support/Project/Category/Beta`） |
-| `../msa.png` | 256×256 列表图标（被 `ca_profile.xml` 与 `ca/msa.xml` 的 `<Icon>` 引用） |
-| `../../../msa.plg` | 安装入口，`<PLUGIN>` 已补 `support="https://github.com/scoltzero/msa/issues"` |
+| `../../../LICENSE` | 浠撳簱鏍圭殑 **GPL-3.0** 鍏ㄦ枃锛圕A 瑕佹眰 OSI 璁ゅ彲鍗忚锛?|
+| `../../../ca_profile.xml` | 浠撳簱鏍圭殑 **缁存姢鑰呰祫鏂?*锛坄<CommunityApplications>`锛歚Profile/Icon/WebPage`锛?|
+| `ca/msa.xml` | **CA 鎻掍欢妯℃澘**锛堟牴鍏冪礌 `<Plugin>`锛歚Name/PluginURL/Icon/Overview/Support/Project/Category/Beta`锛?|
+| `../msa.png` | 256脳256 鍒楄〃鍥炬爣锛堣 `ca_profile.xml` 涓?`ca/msa.xml` 鐨?`<Icon>` 寮曠敤锛?|
+| `../../../msa.plg` | 瀹夎鍏ュ彛锛宍<PLUGIN>` 宸茶ˉ `support="https://github.com/leafss1022/msa/issues"` |
 
-> 所有 `<Icon>` / `<PluginURL>` 都用 `raw.githubusercontent.com/scoltzero/msa/main/...` 的 raw 链接，**前提是仓库 public 且这些文件已推到 `main`**。
+> 鎵€鏈?`<Icon>` / `<PluginURL>` 閮界敤 `raw.githubusercontent.com/leafss1022/msa/main/...` 鐨?raw 閾炬帴锛?*鍓嶆彁鏄粨搴?public 涓旇繖浜涙枃浠跺凡鎺ㄥ埌 `main`**銆?
+## 涓婃灦鍓嶇疆鏉′欢锛圕A 瀹樻柟瑕佹眰锛?
+1. 浠撳簱 **public** 涓旀寔缁淮鎶?鉁咃紙`leafss1022/msa`锛岀‘璁ゅ凡璁句负 public锛?2. 浠撳簱鏍规湁 **OSI LICENSE** 鉁咃紙GPL-3.0 宸叉斁锛?3. 鏈夋晥鐨?**plugin 鍖呰 XML** 鉁咃紙`ca/msa.xml`锛?4. **`ca_profile.xml`** 鍚潪绌?`<Profile>` 鉁咃紙浠撳簱鏍癸級
+5. **Support 閾炬帴** 鉁咃紙GitHub Issues锛?
+## 鎻愪氦姝ラ
 
-## 上架前置条件（CA 官方要求）
+1. 鎶婃湰娆℃柊澧?淇敼鐨勬枃浠?commit 骞?push 鍒?`main`锛坄LICENSE`銆乣ca_profile.xml`銆乣packaging/unraid/ca/msa.xml`銆乣packaging/unraid/msa.png`銆佷袱涓?`.plg` 鐨?`support=`锛夈€?2. 纭 raw 閾炬帴鍙叕缃戣闂紝渚嬪锛?   - `https://raw.githubusercontent.com/leafss1022/msa/main/msa.plg`
+   - `https://raw.githubusercontent.com/leafss1022/msa/main/packaging/unraid/msa.png`
+3. 鎵撳紑 **https://ca.unraid.net/submit** 鈫?Start Submission锛屽～鍏ヤ粨搴撳湴鍧€ `https://github.com/leafss1022/msa`銆?4. 璁╅棬鎴锋壂鎻忎粨搴擄紙浼氳 `ca_profile.xml` + 鎻掍欢 XML锛夛紝杩囨煡閲嶏紙duplicate sweep锛夈€侀瑙堝垪琛ㄣ€?5. 鎻愪氦锛岀瓑寰呭鏍搞€傚鏍搁€氳繃鍚庣敤鎴峰嵆鍙湪 CA 閲屾悳绱?鈥渕sa鈥?瀹夎銆?
+## 涓婃灦鍚庣殑缁存姢涔夊姟锛堝畼鏂规槑绀猴級
 
-1. 仓库 **public** 且持续维护 ✅（`scoltzero/msa`，确认已设为 public）
-2. 仓库根有 **OSI LICENSE** ✅（GPL-3.0 已放）
-3. 有效的 **plugin 包装 XML** ✅（`ca/msa.xml`）
-4. **`ca_profile.xml`** 含非空 `<Profile>` ✅（仓库根）
-5. **Support 链接** ✅（GitHub Issues）
-
-## 提交步骤
-
-1. 把本次新增/修改的文件 commit 并 push 到 `main`（`LICENSE`、`ca_profile.xml`、`packaging/unraid/ca/msa.xml`、`packaging/unraid/msa.png`、两个 `.plg` 的 `support=`）。
-2. 确认 raw 链接可公网访问，例如：
-   - `https://raw.githubusercontent.com/scoltzero/msa/main/msa.plg`
-   - `https://raw.githubusercontent.com/scoltzero/msa/main/packaging/unraid/msa.png`
-3. 打开 **https://ca.unraid.net/submit** → Start Submission，填入仓库地址 `https://github.com/scoltzero/msa`。
-4. 让门户扫描仓库（会读 `ca_profile.xml` + 插件 XML），过查重（duplicate sweep）、预览列表。
-5. 提交，等待审核。审核通过后用户即可在 CA 里搜索 “msa” 安装。
-
-## 上架后的维护义务（官方明示）
-
-- 随新 Unraid 版本更新保持兼容。
-- 在 Support 链接（GitHub Issues）响应支持请求。
-- beta/实验版要在 `<Beta>` 标记或版本号上明确标注。
-
-## 可选增强
-
-- 若想用 Unraid 论坛支持帖替代 GitHub Issues：在 forums.unraid.net 发帖后，把帖子 URL 同时填到
-  - `ca/msa.xml` 的 `<Support>`
-  - `ca_profile.xml` 的 `<Forum>`（取消注释）
-  - 根 `msa.plg` 的 `support=` 属性（及 `packaging/unraid/msa.plg.in` 模板）
-- 捐赠入口：在 `ca_profile.xml` 取消注释 `<DonateLink>`/`<DonateText>`。
+- 闅忔柊 Unraid 鐗堟湰鏇存柊淇濇寔鍏煎銆?- 鍦?Support 閾炬帴锛圙itHub Issues锛夊搷搴旀敮鎸佽姹傘€?- beta/瀹為獙鐗堣鍦?`<Beta>` 鏍囪鎴栫増鏈彿涓婃槑纭爣娉ㄣ€?
+## 鍙€夊寮?
+- 鑻ユ兂鐢?Unraid 璁哄潧鏀寔甯栨浛浠?GitHub Issues锛氬湪 forums.unraid.net 鍙戝笘鍚庯紝鎶婂笘瀛?URL 鍚屾椂濉埌
+  - `ca/msa.xml` 鐨?`<Support>`
+  - `ca_profile.xml` 鐨?`<Forum>`锛堝彇娑堟敞閲婏級
+  - 鏍?`msa.plg` 鐨?`support=` 灞炴€э紙鍙?`packaging/unraid/msa.plg.in` 妯℃澘锛?- 鎹愯禒鍏ュ彛锛氬湪 `ca_profile.xml` 鍙栨秷娉ㄩ噴 `<DonateLink>`/`<DonateText>`銆?
