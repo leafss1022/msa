@@ -1,16 +1,16 @@
-# msa
+﻿# msa
 
 <p align="center">
   <img src="logo_motion/msm_logo_motion.gif" alt="MSA animated logo" width="320">
 </p>
 
-[中文 README](README.md)
+[涓枃 README](README.md)
 
 [FAQ](docs/faq.en.md)
 
 `msa` is an open-source reimplementation of the MSM-style management experience for the MosDNS + Mihomo workflow. It focuses on self-hosted DNS split routing, transparent proxy management, Mihomo management, and platform-native installs.
 
-Current release: `v0.4.1.1`
+Current release: `v0.4.2.0`
 
 > **Tip: Cloudflare Redirect is experimental.** The `msa cloudflare-redirect` CLI can rewrite user-selected Cloudflare-protected domains to locally scanned Cloudflare CDN IPv4/IPv6 addresses for direct clients only. Results depend on the msa host's ISP route, Cloudflare Anycast, IPv6 reachability, domain-list quality, and MosDNS config. See [Cloudflare Redirect docs](docs/plugins/cloudflare-redirect.md).
 
@@ -46,16 +46,16 @@ Current release: `v0.4.1.1`
 GitHub Release:
 
 ```text
-https://github.com/leafss1022/msa/releases/tag/v0.4.1.1
+https://github.com/leafss1022/msa/releases/tag/v0.4.2.0
 ```
 
 | Asset | URL |
 |---|---|
-| Linux x86_64 | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa-linux-amd64.tar.gz` |
-| Linux ARM64 | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa-linux-arm64.tar.gz` |
-| fnOS x86 FPK | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa_0.4.1.1_x86.fpk` |
-| fnOS ARM FPK | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa_0.4.1.1_arm.fpk` |
-| Unraid PLG | `https://github.com/leafss1022/msa/releases/download/v0.4.1.1/msa.plg` |
+| Linux x86_64 | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa-linux-amd64.tar.gz` |
+| Linux ARM64 | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa-linux-arm64.tar.gz` |
+| fnOS x86 FPK | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa_0.4.2.0_x86.fpk` |
+| fnOS ARM FPK | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa_0.4.2.0_arm.fpk` |
+| Unraid PLG | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa.plg` |
 
 ## Quick Start
 
