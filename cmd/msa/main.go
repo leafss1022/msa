@@ -25,11 +25,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/scoltzero/msa/internal/cloudflareredirect"
-	"github.com/scoltzero/msa/internal/server"
+	"github.com/leafss1022/msa/internal/cloudflareredirect"
+	"github.com/leafss1022/msa/internal/server"
 )
 
-var version = "0.4.0.3"
+var version = "0.4.1.0"
 
 var (
 	currentEUID                        = os.Geteuid
@@ -188,7 +188,7 @@ func printUsage() {
   msa logs [--lines 100] [msa|mosdns|mihomo]
   msa doctor [--config /opt/msa]
   msa cloudflare-redirect start|stop|scan|apply|status [--config PATH]
-  msa update [--repo scoltzero/msa] [--url https://.../msa-linux-amd64.tar.gz]
+  msa update [--repo leafss1022/msa] [--url https://.../msa-linux-amd64.tar.gz]
   msa uninstall [--config /opt/msa] [--prefix /usr/local] [--service-name msa] [--purge --yes|--keep-data]
   msa migrate [--config /opt/msa]
   msa reset-password [--config /opt/msa] [password]
@@ -1460,7 +1460,7 @@ func defaultGitHubRepo() string {
 	if v := strings.TrimSpace(os.Getenv("MSA_GITHUB_REPO")); v != "" {
 		return v
 	}
-	return "scoltzero/msa"
+	return "leafss1022/msa"
 }
 
 func isUnraidRuntime() bool {

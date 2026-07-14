@@ -5,7 +5,7 @@
 ## 0. 前置
 
 - 在干净的 `main` 工作区操作（`git status` 干净）。
-- 已安装 Go、Node 22、`gh`（已登录 `scoltzero/msa` 推送权限）。
+- 已安装 Go、Node 22、`gh`（已登录 `leafss1022/msa` 推送权限）。
 - 产物输出在 `dist/`（已 gitignore）。
 
 ## ⚠️ 最重要的一条规则
@@ -30,7 +30,7 @@ make package VERSION=$VERSION GOOS=linux GOARCH=amd64
 make package VERSION=$VERSION GOOS=linux GOARCH=arm64
 
 # Unraid（会重建 amd64 作为依赖，并把 txz 哈希写进 root msa.plg）
-make unraid VERSION=$VERSION UNRAID_VERSION=$VERSION GITHUB_REPO=scoltzero/msa RELEASE_TAG=v$VERSION GOOS=linux GOARCH=amd64
+make unraid VERSION=$VERSION UNRAID_VERSION=$VERSION GITHUB_REPO=leafss1022/msa RELEASE_TAG=v$VERSION GOOS=linux GOARCH=amd64
 ```
 
 ### 1a. 生成旧名兼容副本 + 校验和（在所有 make 跑完之后）
@@ -87,7 +87,7 @@ tag 用 `v$VERSION`。**首次发布**用 `create`，**补传/覆盖**用 `uploa
 ```bash
 VERSION=0.3.0
 # 首次创建（如该 tag 还没 release）
-gh release create v$VERSION --repo scoltzero/msa --title v$VERSION --notes-file CHANGELOG-or-notes.md \
+gh release create v$VERSION --repo leafss1022/msa --title v$VERSION --notes-file CHANGELOG-or-notes.md \
   dist/msa-linux-amd64.tar.gz dist/msa-linux-amd64.tar.gz.sha256 \
   dist/msm-free-linux-amd64.tar.gz dist/msm-free-linux-amd64.tar.gz.sha256 \
   dist/msa-linux-arm64.tar.gz dist/msa-linux-arm64.tar.gz.sha256 \
@@ -97,19 +97,19 @@ gh release create v$VERSION --repo scoltzero/msa --title v$VERSION --notes-file 
   dist/msa_${VERSION}_x86.fpk dist/msa_${VERSION}_x86.fpk.sha256
 
 # 已存在则覆盖上传（把 create 换成 upload ... --clobber）
-gh release upload v$VERSION --repo scoltzero/msa --clobber \
+gh release upload v$VERSION --repo leafss1022/msa --clobber \
   dist/msa-linux-amd64.tar.gz ... （同上资产列表）
 ```
 
 ### 验证发布端 digest 与本地一致
 
 ```bash
-gh release view v$VERSION --repo scoltzero/msa --json assets \
+gh release view v$VERSION --repo leafss1022/msa --json assets \
   --jq '.assets[] | "\(.name)  \(.digest)"'
 # 旧名兼容副本与新名应同 digest（amd64/arm64）
 ```
 
-旧客户端可达性（v0.2.2 升级链路）：旧仓库名 `scoltzero/msm-free` 经 GitHub 重定向到 `scoltzero/msa`，下载 `msm-free-linux-amd64.tar.gz` 会 301/302 到资产。
+旧客户端可达性（v0.2.2 升级链路）：旧仓库名 `scoltzero/msm-free` 经 GitHub 重定向到 `leafss1022/msa`，下载 `msm-free-linux-amd64.tar.gz` 会 301/302 到资产。
 
 ---
 

@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/scoltzero/msa/internal/cloudflareredirect"
+	"github.com/leafss1022/msa/internal/cloudflareredirect"
 )
 
 func TestStopRuntimeTerminatesPIDAndRemovesPIDFiles(t *testing.T) {
