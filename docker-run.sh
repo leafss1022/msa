@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+﻿#!/usr/bin/env sh
 set -eu
 
 IMAGE="${MSA_IMAGE:-ghcr.io/leafss1022/msa:v0.3.9.2}"
