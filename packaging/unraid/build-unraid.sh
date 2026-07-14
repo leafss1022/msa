@@ -1,10 +1,10 @@
-#!/bin/sh
+﻿#!/bin/sh
 set -eu
 
 APP_NAME="${APP_NAME:-msa}"
 VERSION="${VERSION:-0.1.0-dev}"
 UNRAID_VERSION="${UNRAID_VERSION:-$VERSION}"
-GITHUB_REPO="${GITHUB_REPO:-scoltzero/msa}"
+GITHUB_REPO="${GITHUB_REPO:-leafss1022/msa}"
 RELEASE_TAG="${RELEASE_TAG:-v$VERSION}"
 DIST="${DIST:-dist}"
 ARCH="x86_64"
