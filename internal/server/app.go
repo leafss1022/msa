@@ -20,7 +20,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/scoltzero/msa/internal/cloudflareredirect"
+	"github.com/leafss1022/msa/internal/cloudflareredirect"
 	_ "modernc.org/sqlite"
 )
 
