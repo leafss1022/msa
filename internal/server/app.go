@@ -95,6 +95,9 @@ func (a *App) Close() {
 }
 
 func (a *App) EnsureBaseLayout() error {
+	if err := a.ensureMosDNSRuleFiles(); err != nil {
+		return err
+	}
 	dirs := []string{
 		"configs/logs",
 		"configs/mosdns/sub_config",
