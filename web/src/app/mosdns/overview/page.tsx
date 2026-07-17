@@ -14,12 +14,14 @@ import {
   Layers,
   MapPin,
   Server,
+  RotateCw,
   type LucideIcon,
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { cn } from "@/lib/utils";
-import { apiData, apiList, formatBytes, formatPercent } from "@/lib/api";
+import { api, apiData, apiList, formatBytes, formatPercent } from "@/lib/api";
 import { useApiPath } from "@/lib/use-api";
+import { useToaster, ToastStack } from "@/components/Toaster";
 
 interface RuleRow {
   name: string;
@@ -590,16 +592,36 @@ export default function MosdnsOverviewPage() {
   const trend = useMemo(() => makeTrend(entries), [entries]);
   const currentDuration = numberValue(entries[0]?.duration_ms || entries[0]?.elapsed_ms || entries[0]?.cost_ms || entries[0]?.ms || entries[0]?.duration || avgDuration);
   const running = Boolean(data.running || data.status === "running");
+  const { showToast } = useToaster();
 
   return (
     <AppShell>
       <div className="space-y-6 animate-fade-in">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-foreground">MosDNS 概述</h1>
-          <div className="flex items-center gap-2">
-            <span className={cn("h-2 w-2 rounded-full", running ? "bg-green-500 animate-pulse" : "bg-gray-400")} />
-            <span className="text-sm text-muted-foreground">{running ? "运行中" : "已停止"}</span>
-          </div>
+          <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <span className={cn("h-2 w-2 rounded-full", running ? "bg-green-500 animate-pulse" : "bg-gray-400")} />
+                <span className="text-sm text-muted-foreground">{running ? "运行中" : "已停止"}</span>
+              </div>
+              <button
+                onClick={async () => {
+                  try {
+                    const apiUrl = "/api/v1/services/mosdns/restart?wait=1" + "&timeout=8";
+                    const res = await api(apiUrl, { method: "POST" });
+                    if (res.success === false) throw new Error(res.error || "restart failed");
+                    showToast("MosDNS restart success");
+                  } catch (err) {
+                    showToast(err instanceof Error ? err.message : String(err));
+                  }
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                title="Restart MosDNS"
+              >
+                <RotateCw className="h-3.5 w-3.5" />
+                Restart
+              </button>
+            </div>
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">

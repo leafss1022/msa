@@ -2,26 +2,48 @@
 
 ## Unreleased
 
-## v0.4.3.0 - 2026-07-17
+## v0.4.4.0 - 2026-07-17
+
+### 中文
+#### 新增
+- 在 MosDNS 概览页面添加重启按钮
+- 修复 rewrite.txt 空文件导致 MosDNS 启动失败的问题
+
+#### 修复
+- 修复文档编码和版本号不一致的问题
+- 修复构建系统缺失 diskusage.go 导致交叉编译失败的问题
+
+### English
+#### Added
+- Add restart button to MosDNS overview page
+- Fix rewrite.txt empty file causing MosDNS startup failure
+
+#### Fixes
+- Fix document encoding and version inconsistency issues
+- Fix cross-compilation failure due to missing diskusage.go
+
+
+
+## v0.4.4.0 - 2026-07-17
 
 ### 中文
 #### 修复
-- 修复文档版本号不一致的问题（docs 中引用 v0.4.1.1 统一更新为 v0.4.3.0）
+- 修复文档版本号不一致的问题（docs 中引用 v0.4.1.1 统一更新为 v0.4.4.0）
 - 修复文档编码问题，确保 UTF-8 无 BOM 编码
 - 修复 msa.plg 中遗留的旧版本号
 
 #### 变更
-- 升级版本号至 0.4.3.0
+- 升级版本号至 0.4.4.0
 - 统一更新所有文档的版本引用
 
 ### English
 #### Fixes
-- Fix inconsistent version references in docs (v0.4.1.1 updated to v0.4.3.0)
+- Fix inconsistent version references in docs (v0.4.1.1 updated to v0.4.4.0)
 - Fix document encoding issues, ensure UTF-8 without BOM
 - Fix old version references in msa.plg
 
 #### Changes
-- Bump version to 0.4.3.0
+- Bump version to 0.4.4.0
 - Unify version references across all documents
 
 

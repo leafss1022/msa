@@ -1,6 +1,6 @@
 services:
   msa:
-    image: ${MSA_IMAGE:-ghcr.io/leafss1022/msa:v0.4.3.0}
+    image: ${MSA_IMAGE:-ghcr.io/leafss1022/msa:v0.4.4.0}
     container_name: ${MSA_CONTAINER_NAME:-msa}
     cap_add:
       - NET_ADMIN

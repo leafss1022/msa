@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-IMAGE="${MSA_IMAGE:-ghcr.io/leafss1022/msa:v0.4.3.0}"
+IMAGE="${MSA_IMAGE:-ghcr.io/leafss1022/msa:v0.4.4.0}"
 NAME="${MSA_CONTAINER_NAME:-msa}"
 DATA_DIR="${MSA_DOCKER_DATA_DIR:-$(pwd)/msa-data}"
 NETWORK_MODE="${MSA_DOCKER_NETWORK_MODE:-host-tun}"

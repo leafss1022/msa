@@ -54,7 +54,7 @@ function uploadAsset(uploadUrl, assetPath, assetName, contentType) {
 
 async function main() {
     try {
-        const release = await api('GET', '/repos/leafss1022/msa/releases/tags/v0.4.3.0');
+        const release = await api('GET', '/repos/leafss1022/msa/releases/tags/v0.4.4.0');
         console.log('Release: ' + release.tag_name + ' assets: ' + release.assets.length);
         
         for (const a of release.assets) {

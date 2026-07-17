@@ -1,6 +1,6 @@
 services:
   msa:
-    image: ghcr.io/leafss1022/msa:v0.4.3.0
+    image: ghcr.io/leafss1022/msa:v0.4.4.0
     container_name: msa
     network_mode: host
     cap_add:
