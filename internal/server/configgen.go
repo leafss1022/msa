@@ -827,7 +827,12 @@ func (a *App) ensureMosDNSRuleFiles() error {
 	}
 	for rel, content := range files {
 		path := filepath.Join(a.DataDir, rel)
-		if _, err := os.Stat(path); os.IsNotExist(err) {
+		// Always recreate rewrite.txt and switch files to fix corrupted content
+		needsWrite := false
+		if rel == "configs/mosdns/rule/rewrite.txt" || strings.HasPrefix(filepath.Base(rel), "switch") {
+			needsWrite = true
+		}
+		if needsWrite || func() bool { _, err := os.Stat(path); return os.IsNotExist(err) }() {
 			if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
 				return err
 			}
