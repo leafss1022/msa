@@ -1,4 +1,4 @@
-﻿#!/bin/sh
+#!/bin/sh
 set -eu
 
 APP_NAME="${APP_NAME:-msa}"

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Plugin>
 <Name>msa</Name>
-<PluginURL>https://raw.githubusercontent.com/scoltzero/msa/main/msa.plg</PluginURL>
-<Icon>https://raw.githubusercontent.com/scoltzero/msa/main/packaging/unraid/msa.png</Icon>
+<PluginURL>https://raw.githubusercontent.com/leafss1022/msa/main/msa.plg</PluginURL>
+<Icon>https://raw.githubusercontent.com/leafss1022/msa/main/packaging/unraid/msa.png</Icon>
 <Overview>
 A free and open-source, user-facing all-in-one management tool for DNS and proxy (mihomo / sing-box, in development), packaged for Unraid.
 msa installs a lightweight Utilities page entry plus a self-managed local service. The Unraid plugin page is only for enabling the rc service, setting the listen host/port, choosing the data directory, viewing status, and opening the separate msa WebUI. The full DNS/proxy management interface runs in that WebUI.
 After you complete the in-app setup wizard, msa can run MosDNS (DNS), Mihomo (proxy/TProxy), and the required nftables rules. Online MosDNS/Mihomo/Zashboard core downloads are verified against GitHub Release API asset SHA-256 digests before install; local uploads remain user-supplied files and are not marked as project-verified. Default sample subscriptions/nodes are inert placeholders only. Persistent data lives under /mnt/user/appdata/msa.
 Update and remove msa from the Unraid Plugins page (not via the in-app updater).
 </Overview>
-<Support>https://github.com/scoltzero/msa/issues</Support>
-<Project>https://github.com/scoltzero/msa</Project>
+<Support>https://github.com/leafss1022/msa/issues</Support>
+<Project>https://github.com/leafss1022/msa</Project>
 <Category>Network:Management Tools:System Plugins:</Category>
 <Beta>False</Beta>
 <Date>2026-06-27</Date>

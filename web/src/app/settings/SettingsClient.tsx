@@ -175,7 +175,7 @@ const themeOptions: Array<{ id: ThemeMode; label: string; Icon: LucideIcon }> = 
   { id: "system", label: "跟随系统", Icon: Monitor },
 ];
 
-const RELEASE_REPO_OWNER = "scoltzero";
+const RELEASE_REPO_OWNER = "leafss1022";
 const RELEASE_REPO_NAME = "msa";
 const RELEASE_REPO = `${RELEASE_REPO_OWNER}/${RELEASE_REPO_NAME}`;
 const RELEASE_REPO_URL = `https://github.com/${RELEASE_REPO}`;
