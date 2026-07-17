@@ -1,18 +1,18 @@
-﻿# Docker TUN Experimental Deployment
+# Docker TUN Experimental Deployment
 
-[涓枃鐗堟湰](docker.md)
+[中文版本](docker.md)
 
 Docker deployment is still experimental and is not the recommended installation path yet. It is intended for users who understand Docker, TUN, static routes, and side-router integration. For production or long-term use, prefer [Linux tarball/systemd](install/linux.md), [fnOS FPK](install/fnos-fpk.md), or [Unraid PLG](install/unraid-plg.md).
 
-Current release: `v0.4.2.0`
+Current release: `v0.4.3.0`
 
 Current Docker experimental image:
 
 ```text
-ghcr.io/leafss1022/msa:v0.4.2.0
+ghcr.io/leafss1022/msa:v0.4.3.0
 ```
 
-This experimental image is not pushed as `latest`. To pull or deploy the Docker experimental version, explicitly use the `v0.4.2.0` tag.
+This experimental image is not pushed as `latest`. To pull or deploy the Docker experimental version, explicitly use the `v0.4.3.0` tag.
 
 ## Current Status
 
@@ -67,7 +67,7 @@ The repository already provides `docker-compose.yml`. If you need to create the 
 ```yaml
 services:
   msa:
-    image: ghcr.io/leafss1022/msa:v0.4.2.0
+    image: ghcr.io/leafss1022/msa:v0.4.3.0
     container_name: msa
     network_mode: host
     cap_add:
@@ -95,7 +95,7 @@ docker compose up -d
 
 The default compose file uses:
 
-- Image: `ghcr.io/leafss1022/msa:v0.4.2.0`
+- Image: `ghcr.io/leafss1022/msa:v0.4.3.0`
 - Network: `host`
 - Data directory: `./msa-data:/opt/msa`
 - WebUI: `http://<host-ip>:7777`
@@ -126,7 +126,7 @@ docker run -d \
   -e MSA_DOCKER_NETWORK_MODE=host-tun \
   -e MSA_DATA_DIR=/opt/msa \
   -v "$PWD/msa-data:/opt/msa" \
-  ghcr.io/leafss1022/msa:v0.4.2.0
+  ghcr.io/leafss1022/msa:v0.4.3.0
 ```
 
 ## Quick Start: macvlan TUN
@@ -140,7 +140,7 @@ The repository already provides `docker-compose.macvlan.yml`. If you need to cre
 ```yaml
 services:
   msa:
-    image: ${MSA_IMAGE:-ghcr.io/leafss1022/msa:v0.4.2.0}
+    image: ${MSA_IMAGE:-ghcr.io/leafss1022/msa:v0.4.3.0}
     container_name: ${MSA_CONTAINER_NAME:-msa}
     cap_add:
       - NET_ADMIN
@@ -181,7 +181,7 @@ cp docker.env.example .env
 You can also copy this minimal macvlan compose `.env` example and save it as `.env`:
 
 ```text
-MSA_IMAGE=ghcr.io/leafss1022/msa:v0.4.2.0
+MSA_IMAGE=ghcr.io/leafss1022/msa:v0.4.3.0
 MSA_CONTAINER_NAME=msa
 MSA_DOCKER_DATA_DIR=./msa-data
 MSA_DOCKER_NETWORK_NAME=msa-macvlan
@@ -218,7 +218,7 @@ The script creates the `msa-macvlan` Docker network if it does not already exist
 The first Docker version supports manual Unraid Dockerman setup only. It does not provide a Community Applications container template.
 
 1. Enable custom networks in Unraid Docker settings, and choose `macvlan` or the custom network implementation recommended for your current system.
-2. Create a new container and set the image to `ghcr.io/leafss1022/msa:v0.4.2.0`.
+2. Create a new container and set the image to `ghcr.io/leafss1022/msa:v0.4.3.0`.
 3. Set Network Type to a custom LAN network such as `br0`.
 4. Set Fixed IP address to a static IPv4 address outside your DHCP pool, for example `192.168.1.10`.
 5. Add this to Extra Parameters or advanced parameters:
@@ -388,7 +388,7 @@ fi
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `MSA_IMAGE` | `ghcr.io/leafss1022/msa:v0.4.2.0` | Container image |
+| `MSA_IMAGE` | `ghcr.io/leafss1022/msa:v0.4.3.0` | Container image |
 | `MSA_CONTAINER_NAME` | `msa` | Container name |
 | `MSA_DOCKER_DATA_DIR` | `$PWD/msa-data` | Host data directory |
 | `MSA_DOCKER_NETWORK_MODE` | `host-tun` | `host-tun` or `macvlan-tun` |
@@ -503,7 +503,7 @@ docker compose up -d
 Plain Docker:
 
 ```bash
-docker pull ghcr.io/leafss1022/msa:v0.4.2.0
+docker pull ghcr.io/leafss1022/msa:v0.4.3.0
 docker stop msa
 docker rm msa
 ./docker-run.sh

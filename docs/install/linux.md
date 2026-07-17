@@ -1,62 +1,70 @@
-﻿# Linux tarball/systemd 瀹夎
+# Linux tarball/systemd 安装
 
-鏈〉闈㈤€傜敤浜庢櫘閫?Linux 涓绘満涓婄殑 `msa-linux-amd64.tar.gz` / `msa-linux-arm64.tar.gz` 瀹夎鍖呫€侺inux tarball/systemd 鏄綋鍓嶆帹鑽愮殑閫氱敤瀹夎鏂瑰紡锛屼篃鏄敮涓€鏀寔 `msa update` 鍜?`msa uninstall` 鐨勫畨瑁呮柟寮忋€?
-褰撳墠鐗堟湰锛歚v0.4.2.0`
+本页面适用于普通 Linux 主机上的 `msa-linux-amd64.tar.gz` / `msa-linux-arm64.tar.gz` 安装包。Linux tarball/systemd 是当前推荐的通用安装方式，也是唯一支持 `msa update` 和 `msa uninstall` 的安装方式。
 
-## 涓嬭浇
+当前版本：`v0.4.3.0`
 
-| 鏋舵瀯 | 涓嬭浇鍦板潃 |
+## 下载
+
+| 架构 | 下载地址 |
 |---|---|
-| x86_64 / amd64 | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa-linux-amd64.tar.gz` |
-| ARM64 / aarch64 | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa-linux-arm64.tar.gz` |
+| x86_64 / amd64 | `https://github.com/leafss1022/msa/releases/download/v0.4.3.0/msa-linux-amd64.tar.gz` |
+| ARM64 / aarch64 | `https://github.com/leafss1022/msa/releases/download/v0.4.3.0/msa-linux-arm64.tar.gz` |
 
-Release 椤甸潰锛?
+Release 页面：
+
 ```text
-https://github.com/leafss1022/msa/releases/tag/v0.4.2.0
+https://github.com/leafss1022/msa/releases/tag/v0.4.3.0
 ```
 
-## 瀹夎
+## 安装
 
-x86_64 / amd64锛?
+x86_64 / amd64：
+
 ```bash
 curl -L -o msa-linux-amd64.tar.gz \
-  https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa-linux-amd64.tar.gz
+  https://github.com/leafss1022/msa/releases/download/v0.4.3.0/msa-linux-amd64.tar.gz
 
 tar -xzf msa-linux-amd64.tar.gz -C /tmp
-sudo /tmp/msa-0.4.2.0-linux-amd64/install.sh
+sudo /tmp/msa-0.4.3.0-linux-amd64/install.sh
 ```
 
-ARM64 / aarch64锛?
+ARM64 / aarch64：
+
 ```bash
 curl -L -o msa-linux-arm64.tar.gz \
-  https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa-linux-arm64.tar.gz
+  https://github.com/leafss1022/msa/releases/download/v0.4.3.0/msa-linux-arm64.tar.gz
 
 tar -xzf msa-linux-arm64.tar.gz -C /tmp
-sudo /tmp/msa-0.4.2.0-linux-arm64/install.sh
+sudo /tmp/msa-0.4.3.0-linux-arm64/install.sh
 ```
 
-瀹夎鑴氭湰榛樿瀹屾垚杩欎簺鎿嶄綔锛?
-- 瀹夎浜岃繘鍒跺埌 `/usr/local/bin/msa`
-- 娉ㄥ唽鍏煎鍛戒护 `/usr/local/bin/msm`
-- 鍒濆鍖栨暟鎹洰褰?`/opt/msa`
-- 瀹夎 systemd 鏈嶅姟 `msa.service`
-- 鍚姩 WebUI锛岄粯璁ょ洃鍚?`0.0.0.0:7777`
+安装脚本默认完成这些操作：
 
-鑷畾涔夋暟鎹洰褰曘€佺洃鍚湴鍧€鍜岀鍙ｏ細
+- 安装二进制到 `/usr/local/bin/msa`
+- 注册兼容命令 `/usr/local/bin/msm`
+- 初始化数据目录 `/opt/msa`
+- 安装 systemd 服务 `msa.service`
+- 启动 WebUI，默认监听 `0.0.0.0:7777`
+
+自定义数据目录、监听地址和端口：
 
 ```bash
 sudo ./install.sh --data-dir /opt/msa --host 0.0.0.0 --port 7777
 ```
 
-瀹夎瀹屾垚鍚庢墦寮€锛?
+安装完成后打开：
+
 ```text
-http://<鏈嶅姟鍣↖P>:7777
+http://<服务器IP>:7777
 ```
 
-棣栨杩涘叆浼氭樉绀哄垵濮嬪寲鍚戝銆傚畬鎴愬垵濮嬪寲鍚庯紝`msa` 浼氭寔涔呭寲杩愯鎬侊紱鍚庣画閲嶅惎鏃朵細鎸夐厤缃仮澶?Mihomo銆丮osDNS 鍜?nftables锛岄櫎闈炵敤鎴峰湪 WebUI 涓樉寮忓仠姝㈡湇鍔℃垨娓呴櫎 nftables銆?
-## 甯哥敤鍛戒护
+首次进入会显示初始化向导。完成初始化后，`msa` 会持久化运行态；后续重启时会按配置恢复 Mihomo、MosDNS 和 nftables，除非用户在 WebUI 中显式停止服务或清除 nftables。
 
-systemd锛?
+## 常用命令
+
+systemd：
+
 ```bash
 sudo systemctl status msa
 sudo systemctl stop msa
@@ -64,7 +72,8 @@ sudo systemctl restart msa
 sudo journalctl -u msa -f
 ```
 
-CLI锛?
+CLI：
+
 ```bash
 sudo msa status
 sudo msa stop
@@ -77,54 +86,63 @@ sudo msa cloudflare-redirect status
 sudo msa update
 ```
 
-`msm` 鍜?`msa` 鎸囧悜鍚屼竴濂?CLI銆俙msa stop` 浼氬悜姝ｅ湪杩愯鐨勭鐞嗚繘绋嬪彂閫佷紭闆呭仠姝俊鍙凤紝绠＄悊杩涚▼閫€鍑哄墠浼氬仠姝㈠畠鎵樼鐨?MosDNS 鍜?Mihomo 瀛愯繘绋嬨€?
-闇€瑕佸己鍒跺仠姝㈡椂锛?
+`msm` 和 `msa` 指向同一套 CLI。`msa stop` 会向正在运行的管理进程发送优雅停止信号，管理进程退出前会停止它托管的 MosDNS 和 Mihomo 子进程。
+
+需要强制停止时：
+
 ```bash
 sudo msa stop --timeout 20s --force
 ```
 
-## 鍗囩骇
+## 升级
 
-鎺ㄨ崘浣跨敤锛?
+推荐使用：
+
 ```bash
 sudo msa update
 ```
 
-涔熷彲浠ラ噸鏂拌繍琛屾柊鐗堟湰瀹夎鍖呬腑鐨勫畨瑁呰剼鏈細
+也可以重新运行新版本安装包中的安装脚本：
 
 ```bash
 sudo ./install.sh
 ```
 
-瀹夎鑴氭湰浼氳鐩栦簩杩涘埗骞堕噸鍚湇鍔★紝榛樿淇濈暀鐜版湁鏁版嵁鐩綍銆俙msa update` 浼氫紭鍏堝鐢ㄥ綋鍓嶅畨瑁呯殑鐪熷疄鏁版嵁鐩綍銆佺洃鍚?host 鍜?port锛岄伩鍏嶆洿鏂板悗鍚姩鍒扮┖鐩綍銆?
-## 鍗歌浇
+安装脚本会覆盖二进制并重启服务，默认保留现有数据目录。`msa update` 会优先复用当前安装的真实数据目录、监听 host 和 port，避免更新后启动到空目录。
 
-Linux tarball/systemd 瀹夎鍙互鐩存帴浣跨敤锛?
+## 卸载
+
+Linux tarball/systemd 安装可以直接使用：
+
 ```bash
 sudo msa uninstall
 ```
 
-浜や簰寮忕粓绔細璇㈤棶鏄惁鍒犻櫎 `/opt/msa` 鏁版嵁鐩綍锛涢潪浜や簰鐜榛樿淇濈暀鏁版嵁銆傞渶瑕佽繛閰嶇疆銆佹暟鎹簱銆佹棩蹇椼€佺粍浠朵簩杩涘埗鍜?zashboard 涓€璧峰垹闄ゆ椂锛屾樉寮忔墽琛岋細
+交互式终端会询问是否删除 `/opt/msa` 数据目录；非交互环境默认保留数据。需要连配置、数据库、日志、组件二进制和 zashboard 一起删除时，显式执行：
 
 ```bash
 sudo msa uninstall --purge --yes
 ```
 
-濡傛灉杩樹繚鐣欑潃瑙ｅ帇鍚庣殑鍙戝竷鍖咃紝涔熷彲浠ュ湪鍖呯洰褰曞唴杩愯锛?
+如果还保留着解压后的发布包，也可以在包目录内运行：
+
 ```bash
 sudo ./uninstall.sh
 sudo ./uninstall.sh --purge --yes
 ```
 
-`msa uninstall` 鍙潰鍚?Linux tarball/systemd 瀹夎銆侱ocker銆乁nraid銆乫nOS FPK 璇蜂娇鐢ㄥ搴斿钩鍙扮殑瀹瑰櫒銆佹彃浠舵垨搴旂敤绠＄悊鍣ㄥ嵏杞姐€?
-## 鏁版嵁鐩綍
+`msa uninstall` 只面向 Linux tarball/systemd 安装。Docker、Unraid、fnOS FPK 请使用对应平台的容器、插件或应用管理器卸载。
 
-榛樿鏁版嵁鐩綍锛?
+## 数据目录
+
+默认数据目录：
+
 ```text
 /opt/msa
 ```
 
-涓昏鍐呭锛?
+主要内容：
+
 - `configs/mosdns`
 - `configs/mihomo`
 - `configs/network`
@@ -133,4 +151,4 @@ sudo ./uninstall.sh --purge --yes
 - `database`
 - `backups`
 
-杩愯鐩綍銆佺鍙ｅ拰瀹屾暣鏂囦欢缁撴瀯瑙?[杩愯鍙傝€僝(../reference/runtime.md)銆?
+运行目录、端口和完整文件结构见 [运行参考](../reference/runtime.md)。

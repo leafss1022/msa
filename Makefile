@@ -3,7 +3,7 @@
 APP_NAME := msa
 DIST := dist
 WEB_EXPORT ?= msa_html_export.tar.gz
-VERSION ?= 0.4.2.0
+VERSION ?= 0.4.3.0
 UNRAID_VERSION ?= $(VERSION)
 GITHUB_REPO ?= leafss1022/msa
 RELEASE_TAG ?= v$(VERSION)

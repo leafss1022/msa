@@ -1,10 +1,10 @@
-﻿<!DOCTYPE PLUGIN [
+<!DOCTYPE PLUGIN [
 <!ENTITY name "msa">
 <!ENTITY author "luochuhan">
-<!ENTITY version "0.4.2.0">
+<!ENTITY version "0.4.3.0">
 <!ENTITY githubRepo "leafss1022/msa">
-<!ENTITY releaseTag "v0.4.2.0">
-<!ENTITY packageName "msa-0.4.2.0-x86_64-1">
+<!ENTITY releaseTag "v0.4.3.0">
+<!ENTITY packageName "msa-0.4.3.0-x86_64-1">
 <!ENTITY packageFile "&packageName;.txz">
 <!ENTITY packageURL "https://github.com/&githubRepo;/releases/download/&releaseTag;/&packageFile;">
 <!ENTITY packageSHA256 "782d75364401f408621bbca01e55b46dc102487f833caaec02c46a9bdb6fa6ab">
@@ -12,8 +12,18 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="https://raw.githubusercontent.com/&githubRepo;/main/msa.plg" launch="Utilities/&name;" support="https://github.com/&githubRepo;/issues" icon="network-wired" min="6.12.0">
   <CHANGES>
     <![CDATA[
-### msa 0.4.2.0
-- 鍖呭惈 v0.3.9 鐨勬纭敼鍔細Docker `host-tun` + Mihomo TUN 鍚姩鍚庝細鑷姩琛ラ綈 FakeIP IPv4 / IPv6 璺敱锛屽苟灏濊瘯鍏抽棴鍑哄彛缃戝崱 `rp_filter`銆?- Mihomo 閰嶇疆绠＄悊涓嶅啀灞曠ず鍐呴儴杩愯鍓湰 `configs/mihomo/config.yaml`锛屾墦寮€椤甸潰浼氫紭鍏堟樉绀哄凡搴旂敤鐢ㄦ埛閰嶇疆鎴栤€滈粯璁ら厤缃€濄€?- 榛樿 Mihomo 閰嶇疆鍙厑璁镐慨鏀?`proxy-providers`锛涘叾浠?YAML 瀛楁淇濆瓨鍚庝細杩涘叆鐢ㄦ埛鑷畾涔夐厤缃€?- 淇濆瓨銆佽鐩栨垨澶嶅埗宸插簲鐢ㄧ殑 Mihomo 鐢ㄦ埛閰嶇疆鏃朵細鍚屾鍐呴儴杩愯鍓湰锛岄伩鍏嶉厤缃垪琛ㄤ笌瀹為檯杩愯閰嶇疆婕傜Щ銆?- MosDNS銆丮SA 閫氱敤閰嶇疆鍜?Mihomo 閰嶇疆绠＄悊鍏辩敤鐨?YAML 缂栬緫鍣ㄩ珮浜榻?VS Code Dark+ 椋庢牸銆?- Mihomo 鍒濆鍖栭厤缃噷鐨勮闃呴摼鎺?鑷畾涔夎妭鐐逛笌鈥滀唬鐞嗚妭鐐?> 绠＄悊浠ｇ悊渚涘簲鍟嗏€濈粺涓€鍚屾鍒伴《灞?`proxy-providers` 寮曠敤瀛楁锛涘凡搴旂敤鐢ㄦ埛閰嶇疆鍙浛鎹㈣ section锛屼笉鍐嶅啓鍏ヨ闃呬笅杞藉悗鐨勮妭鐐瑰唴瀹广€?- 鑷畾涔夎妭鐐瑰垎浜摼鎺ュ啀娆℃墦寮€浠嶄繚鎸佲€滃垎浜摼鎺ユā寮忊€濓紝涓嶄細琚繍琛岀敤鐨?`msa_manual.yaml` 鍙嶅悜瑕嗙洊鎴?`proxies:` YAML 鏂囨湰銆?- Mihomo 閰嶇疆椤碘€滆繍琛屼腑鈥濇梺鎭㈠閰嶇疆妯″紡鏍囩锛岀敤鈥滈粯璁ら厤缃?/ 鐢ㄦ埛鑷畾涔夐厤缃€濆尯鍒嗗綋鍓嶈繍琛岄厤缃潵婧愶紝鍚屾椂缁х画闅愯棌鍐呴儴杩愯鍓湰 `configs/mihomo/config.yaml`銆?- 濡傛灉鎮ㄥ湪 v0.3.9 鎴?v0.3.9.1 鏈熼棿娣诲姞/绠＄悊杩囦唬鐞嗚闃呴摼鎺ワ紝鍙楁薄鏌撶殑鐢ㄦ埛閰嶇疆寤鸿鍒犻櫎鍚庨噸鏂板垱寤猴紝涓嶅缓璁户缁紪杈戞薄鏌撴枃浠躲€?- Docker 闀滃儚棰濆鍙戝竷 `ghcr.io/leafss1022/msa:v0.4.2.0`锛屼笉鎺ㄩ€?`latest`銆?    ]]>
+### msa 0.4.3.0
+- 包含 v0.3.9 的正确改动：Docker `host-tun` + Mihomo TUN 启动后会自动补齐 FakeIP IPv4 / IPv6 路由，并尝试关闭出口网卡 `rp_filter`。
+- Mihomo 配置管理不再展示内部运行副本 `configs/mihomo/config.yaml`，打开页面会优先显示已应用用户配置或“默认配置”。
+- 默认 Mihomo 配置只允许修改 `proxy-providers`；其他 YAML 字段保存后会进入用户自定义配置。
+- 保存、覆盖或复制已应用的 Mihomo 用户配置时会同步内部运行副本，避免配置列表与实际运行配置漂移。
+- MosDNS、MSA 通用配置和 Mihomo 配置管理共用的 YAML 编辑器高亮对齐 VS Code Dark+ 风格。
+- Mihomo 初始化配置里的订阅链接/自定义节点与“代理节点 > 管理代理供应商”统一同步到顶层 `proxy-providers` 引用字段；已应用用户配置只替换该 section，不再写入订阅下载后的节点内容。
+- 自定义节点分享链接再次打开仍保持“分享链接模式”，不会被运行用的 `msa_manual.yaml` 反向覆盖成 `proxies:` YAML 文本。
+- Mihomo 配置页“运行中”旁恢复配置模式标签，用“默认配置 / 用户自定义配置”区分当前运行配置来源，同时继续隐藏内部运行副本 `configs/mihomo/config.yaml`。
+- 如果您在 v0.3.9 或 v0.3.9.1 期间添加/管理过代理订阅链接，受污染的用户配置建议删除后重新创建，不建议继续编辑污染文件。
+- Docker 镜像额外发布 `ghcr.io/leafss1022/msa:v0.4.3.0`，不推送 `latest`。
+    ]]>
   </CHANGES>
 
   <FILE Name="/boot/config/plugins/&name;/&packageFile;" Run="upgradepkg --install-new --reinstall">
@@ -52,8 +62,8 @@ set +e
 if [ -x /etc/rc.d/rc.msa ]; then
   /etc/rc.d/rc.msa stop
 fi
-removepkg msa-0.4.2.0-x86_64-1
-rm -f /boot/config/plugins/msa/msa-0.4.2.0-x86_64-1.txz
+removepkg msa-0.4.3.0-x86_64-1
+rm -f /boot/config/plugins/msa/msa-0.4.3.0-x86_64-1.txz
 echo "msa plugin removed. Persistent data remains under /mnt/user/appdata/msa unless you delete it manually."
       ]]>
     </INLINE>

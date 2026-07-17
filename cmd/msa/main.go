@@ -29,7 +29,7 @@ import (
 	"github.com/leafss1022/msa/internal/server"
 )
 
-var version = "0.4.2.0"
+var version = "0.4.3.0"
 
 var (
 	currentEUID                        = os.Geteuid
