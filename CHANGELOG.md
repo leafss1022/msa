@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## v0.4.5.0 - 2026-07-17
+
+### 修复
+- 修复 rewrite.txt 模板为空文件导致 mosdns 启动失败的问题（rule_set.yaml 中 rewrite 插件需要一个空文件而非注释行）
+- 修复 ensureMosDNSRuleFiles 在已存在 rewrite.txt 时不覆盖的问题
+- 更新所有版本引用至 v0.4.5.0
+
 ## v0.4.4.0 - 2026-07-17
 
 ### 中文
