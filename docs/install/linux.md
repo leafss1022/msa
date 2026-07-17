@@ -26,6 +26,7 @@ curl -L -o msa-linux-amd64.tar.gz \
   https://github.com/leafss1022/msa/releases/download/v0.4.3.0/msa-linux-amd64.tar.gz
 
 tar -xzf msa-linux-amd64.tar.gz -C /tmp
+chmod +x /tmp/msa-0.4.3.0-linux-amd64/install.sh
 sudo /tmp/msa-0.4.3.0-linux-amd64/install.sh
 ```
 
@@ -36,6 +37,7 @@ curl -L -o msa-linux-arm64.tar.gz \
   https://github.com/leafss1022/msa/releases/download/v0.4.3.0/msa-linux-arm64.tar.gz
 
 tar -xzf msa-linux-arm64.tar.gz -C /tmp
+chmod +x /tmp/msa-0.4.3.0-linux-arm64/install.sh
 sudo /tmp/msa-0.4.3.0-linux-arm64/install.sh
 ```
 
