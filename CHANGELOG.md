@@ -6,6 +6,24 @@
 
 ### English
 
+# 更新日志
+
+## v0.4.2.0 - 2026-07-14
+
+### 中文
+#### 修复
+- 修复 GitHub API 在线更新检查失败的问题（owner 从 scoltzero 修正为 leafss1022）
+
+#### 变更
+- 升级版本号至 0.4.2.0
+
+### English
+#### Fixes
+- Fix online update check failure caused by incorrect GitHub owner (scoltzero → leafss1022)
+
+#### Changes
+- Bump version to 0.4.2.0
+
 ## v0.3.9.2 - 2026-06-30
 
 ### 中文

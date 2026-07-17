@@ -1,4 +1,4 @@
-﻿package server
+package server
 
 import (
 	"archive/zip"
@@ -28,7 +28,7 @@ func TestSetupInitializeLoginAndGeneratedConfigs(t *testing.T) {
 		"confirmPassword":      "test-password-123",
 		"webPort":              "17777",
 		"selected_interface":   "eth0",
-		"subscription_urls":    "鏈哄満A|https://example.com/a.yaml\nhttps://example.com/b.yaml",
+		"subscription_urls":    "机场A|https://example.com/a.yaml\nhttps://example.com/b.yaml",
 		"mihomo_proxies":       "vless://00000000-0000-4000-8000-000000000000@example.com:443?encryption=none&security=reality&type=tcp&sni=example.com&fp=chrome&pbk=abc&sid=123&flow=xtls-rprx-vision#manual-test-node",
 		"enableIPv6":           true,
 		"nft_proxy_policy":     "direct_default",
@@ -70,7 +70,7 @@ func TestSetupInitializeLoginAndGeneratedConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	text := string(cfg)
-	for _, want := range []string{"proxy-providers:", "msa_manual:", "https://example.com/a.yaml", "鏈哄満A", "鏈哄満1", "tproxy-port: 7896", "geox-url:", "geo-auto-update: false", "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat", "listen: 0.0.0.0:6666", "fake-ip-range: 28.0.0.1/8", "UrlTest: &UrlTest", "sniffer:", "enable: true", "name: 璋锋瓕鏈嶅姟", "Private-Domain:", "Private-IP:", "RULE-SET,Google,璋锋瓕鏈嶅姟", "RULE-SET,Microsoft-CN,鍏ㄧ悆鐩磋繛", "name: 鏈哄満鑺傜偣, type: select, include-all: true, include-all-proxies: true, include-all-providers: true"} {
+	for _, want := range []string{"proxy-providers:", "msa_manual:", "https://example.com/a.yaml", "机场A", "机场1", "tproxy-port: 7896", "geox-url:", "geo-auto-update: false", "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat", "listen: 0.0.0.0:6666", "fake-ip-range: 28.0.0.1/8", "UrlTest: &UrlTest", "sniffer:", "enable: true", "name: 谷歌服务", "Private-Domain:", "Private-IP:", "RULE-SET,Google,谷歌服务", "RULE-SET,Microsoft-CN,全球直连", "name: 机场节点, type: select, include-all: true, include-all-proxies: true, include-all-providers: true"} {
 		if !strings.Contains(text, want) {
 			t.Fatalf("mihomo config missing %q:\n%s", want, text)
 		}
@@ -137,7 +137,7 @@ func TestSetupConfigNormalizesSubscriptionInputs(t *testing.T) {
 		"username":           "root",
 		"selected_interface": "eth0",
 		"subscription_urls": []any{
-			map[string]any{"name": "鏈哄満A", "url": "https://example.com/a.yaml"},
+			map[string]any{"name": "机场A", "url": "https://example.com/a.yaml"},
 			"https://example.com/b.yaml",
 		},
 		"proxy_core":      "mihomo",
@@ -146,7 +146,7 @@ func TestSetupConfigNormalizesSubscriptionInputs(t *testing.T) {
 	if res.Code != http.StatusOK {
 		t.Fatalf("setup config with array subscriptions failed: status=%d body=%s", res.Code, res.Body.String())
 	}
-	if !strings.Contains(res.Body.String(), "鏈哄満A|https://example.com/a.yaml") || !strings.Contains(res.Body.String(), "https://example.com/b.yaml") {
+	if !strings.Contains(res.Body.String(), "机场A|https://example.com/a.yaml") || !strings.Contains(res.Body.String(), "https://example.com/b.yaml") {
 		t.Fatalf("setup config should normalize subscription rows, got: %s", res.Body.String())
 	}
 	cfg, err := os.ReadFile(filepath.Join(app.DataDir, "configs/mihomo/config.yaml"))
@@ -616,7 +616,7 @@ func TestSelfUpdateStateExposesInstallAndAcceleratedDownloadURL(t *testing.T) {
 	for _, want := range []string{
 		`"status":"downloaded"`,
 		`"phase":"downloaded"`,
-		`"message":"鏇存柊鍖呭凡涓嬭浇"`,
+		`"message":"更新包已下载"`,
 		`"can_install":true`,
 		`"effective_download_url":"https://gh-proxy.example/https://github.com/leafss1022/msa/releases/download/v9.9.9/msa-linux-amd64.tar.gz"`,
 	} {
@@ -643,9 +643,9 @@ func TestSelfUpdateDownloadFailurePersistsStatusEvents(t *testing.T) {
 		`"success":false`,
 		`"status":"failed"`,
 		`"phase":"failed"`,
-		`"message":"涓嬭浇鏇存柊澶辫触"`,
-		`"寮€濮嬭繛鎺ヤ笅杞藉湴鍧€"`,
-		`"涓嬭浇鏇存柊澶辫触:`,
+		`"message":"下载更新失败"`,
+		`"开始连接下载地址"`,
+		`"下载更新失败:`,
 	} {
 		if !strings.Contains(body, want) {
 			t.Fatalf("download failure status missing %q: status=%d body=%s", want, download.Code, body)
@@ -677,9 +677,9 @@ func TestSelfUpdateDownloadSuccessPersistsProgressAndEvents(t *testing.T) {
 		`"status":"downloaded"`,
 		`"phase":"downloaded"`,
 		`"progress":100`,
-		`"message":"鏇存柊鍖呭凡涓嬭浇"`,
-		`"宸茶繛鎺ヤ笅杞藉湴鍧€"`,
-		`"鏇存柊鍖呬笅杞藉畬鎴?`,
+		`"message":"更新包已下载"`,
+		`"已连接下载地址"`,
+		`"更新包下载完成"`,
 	} {
 		if !strings.Contains(body, want) {
 			t.Fatalf("download success status missing %q: status=%d body=%s", want, status.Code, body)
@@ -733,13 +733,13 @@ func TestComponentRemoteVersionParsesReleaseMetadata(t *testing.T) {
 
 	mosdns := githubRelease{
 		TagName: "mosdns",
-		Body:    "婧愮爜鏃堕棿: 2026-05-15 16:16:33\n鐗堟湰鍙? ph-yyds-20260515-7a2a3f3\nCommit: 7a2a3f397561f750874b0fcbd1ba131e2844af46\n",
+		Body:    "源码时间: 2026-05-15 16:16:33\n版本号: ph-yyds-20260515-7a2a3f3\nCommit: 7a2a3f397561f750874b0fcbd1ba131e2844af46\n",
 	}
 	if got := app.componentRemoteVersion("mosdns", mosdns); got != "ph-yyds-20260515-7a2a3f3" {
 		t.Fatalf("mosdns remote version = %q", got)
 	}
 
-	mihomoBody := "鏇存柊 [mihomo Meta 鐗圿(https://github.com/MetaCubeX/mihomo/tree/Meta)鑷?v1.19.27锛屽彂甯冧簬 2026-06-06\n鏇存柊 [mihomo Alpha 鐗圿(https://github.com/MetaCubeX/mihomo/tree/Alpha)鑷?checksums.txt锛屽彂甯冧簬 2026-06-06"
+	mihomoBody := "更新 [mihomo Meta 版](https://github.com/MetaCubeX/mihomo/tree/Meta)至 v1.19.27，发布于 2026-06-06\n更新 [mihomo Alpha 版](https://github.com/MetaCubeX/mihomo/tree/Alpha)至 checksums.txt，发布于 2026-06-06"
 	if got := mihomoReleaseBodyVersion(mihomoBody, "meta"); got != "v1.19.27" {
 		t.Fatalf("mihomo meta remote version = %q", got)
 	}
@@ -998,14 +998,14 @@ func TestComponentUpdateUploadInstallsZashboardZip(t *testing.T) {
 
 func TestStructuredMSAJSONLogsFormatLikeOriginal(t *testing.T) {
 	app := newTestApp(t)
-	app.LogInfo("app/app.go:114", "MSA 鍚庣鏈嶅姟鍚姩涓?..", nil)
+	app.LogInfo("app/app.go:114", "MSA 后端服务启动中...", nil)
 	app.LogInfo("app/app.go:945", "gin", map[string]any{"message": `[GIN] 2026/05/31 - 12:58:40 | 200 | 1ms | 192.168.10.223 | GET      "/api/v1/logs/msa/stats"`})
 	logs := requestJSON(t, app, http.MethodGet, "/api/v1/logs/msa?lines=10", tokenForRole(t, app, "admin"), nil)
 	if logs.Code != http.StatusOK {
 		t.Fatalf("logs status=%d body=%s", logs.Code, logs.Body.String())
 	}
 	body := logs.Body.String()
-	if !strings.Contains(body, "[app/app.go:114] MSA 鍚庣鏈嶅姟鍚姩涓?..") || !strings.Contains(body, "[app/app.go:945] gin: [GIN]") {
+	if !strings.Contains(body, "[app/app.go:114] MSA 后端服务启动中...") || !strings.Contains(body, "[app/app.go:945] gin: [GIN]") {
 		t.Fatalf("structured MSA JSON logs were not formatted for WebUI:\n%s", body)
 	}
 	if !strings.Contains(body, `"level":"info"`) || !strings.Contains(body, `"raw":"{`) {
@@ -1015,7 +1015,7 @@ func TestStructuredMSAJSONLogsFormatLikeOriginal(t *testing.T) {
 
 func TestStructuredServiceLogsSplitTimeLevelAndMessage(t *testing.T) {
 	entries := structuredLogLines([]string{
-		`time="2026-06-02T15:50:44.905225194+08:00" level=info msg="[TCP] 127.0.0.1:44074 --> 127.0.0.1:7877 match Match using 婕忕綉涔嬮奔[placeholder-vless-node]"`,
+		`time="2026-06-02T15:50:44.905225194+08:00" level=info msg="[TCP] 127.0.0.1:44074 --> 127.0.0.1:7877 match Match using 漏网之鱼[placeholder-vless-node]"`,
 		`2026/05/31 12:43:58 [adguard_rule] working directory is: adguard/`,
 	})
 	if len(entries) != 2 {
@@ -2018,7 +2018,7 @@ func TestMihomoCustomConfigModeProtectsGeneratedConfigAndRestoresBackup(t *testi
 		if !strings.Contains(text, "CopiedApplied") || !strings.Contains(text, "https://example.com/sub.yaml") {
 			t.Fatalf("custom config should keep user fields while syncing setup providers in %s:\n%s", path, text)
 		}
-		if strings.Contains(text, "name: 鏈哄満鑺傜偣") || strings.Contains(text, "RULE-SET,Google,璋锋瓕鏈嶅姟") {
+		if strings.Contains(text, "name: 机场节点") || strings.Contains(text, "RULE-SET,Google,谷歌服务") {
 			t.Fatalf("setup provider sync should not replace full user config in %s:\n%s", path, text)
 		}
 	}
@@ -2229,7 +2229,7 @@ func TestMihomoConfigAndLogPanelCompatibility(t *testing.T) {
 		t.Fatalf("mihomo logs filtering mismatch: status=%d body=%s", logs.Code, logs.Body.String())
 	}
 	config := requestJSON(t, app, http.MethodGet, "/api/v1/mihomo/config", token, nil)
-	if config.Code != http.StatusOK || !strings.Contains(config.Body.String(), "proxy-providers:") || !strings.Contains(config.Body.String(), "RULE-SET,Google,璋锋瓕鏈嶅姟") {
+	if config.Code != http.StatusOK || !strings.Contains(config.Body.String(), "proxy-providers:") || !strings.Contains(config.Body.String(), "RULE-SET,Google,谷歌服务") {
 		t.Fatalf("mihomo raw config should expose complete config.yaml: status=%d body=%s", config.Code, config.Body.String())
 	}
 	app.setMihomoConfigMode("custom")
@@ -2319,7 +2319,7 @@ func TestConfigCompareBackupAndDiagnostics(t *testing.T) {
 		t.Fatalf("backup status=%d body=%s", backup.Code, backup.Body.String())
 	}
 	diag := requestJSON(t, app, http.MethodGet, "/api/v1/system/diagnostics", token, nil)
-	if diag.Code != http.StatusOK || !strings.Contains(diag.Body.String(), "閰嶇疆鐩綍") || !strings.Contains(diag.Body.String(), "绔彛鍗犵敤") {
+	if diag.Code != http.StatusOK || !strings.Contains(diag.Body.String(), "配置目录") || !strings.Contains(diag.Body.String(), "端口占用") {
 		t.Fatalf("diagnostics incomplete: status=%d body=%s", diag.Code, diag.Body.String())
 	}
 	var diagBody map[string]any
@@ -2467,7 +2467,7 @@ func TestBasicManagementUsersTokensSettingsAndDiagnostics(t *testing.T) {
 		t.Fatalf("appearance get mismatch: status=%d body=%s", appearance.Code, appearance.Body.String())
 	}
 	diagRun := requestJSON(t, app, http.MethodPost, "/api/v1/system/diagnostics/run", token, nil)
-	if diagRun.Code != http.StatusOK || !strings.Contains(diagRun.Body.String(), "閰嶇疆鐩綍") || strings.Contains(diagRun.Body.String(), "recent_errors") {
+	if diagRun.Code != http.StatusOK || !strings.Contains(diagRun.Body.String(), "配置目录") || strings.Contains(diagRun.Body.String(), "recent_errors") {
 		t.Fatalf("diagnostics run incomplete: status=%d body=%s", diagRun.Code, diagRun.Body.String())
 	}
 	diagDownload := requestJSON(t, app, http.MethodGet, "/api/v1/system/diagnostics/download", token, nil)
@@ -2661,7 +2661,7 @@ func TestStructuredSettingsAdminOnlyValidationAndPersistence(t *testing.T) {
 		"appearance": map[string]any{"theme": "dark", "language": "zh-CN"},
 		"system":     map[string]any{"web_port": "18888", "log_level": "debug", "log_retention_days": 14},
 		"mosdns":     map[string]any{"fake_ip_range_v4": "28.0.0.0/8", "enabled": false},
-		"mihomo":     map[string]any{"linux_proxy_mode": "nft", "nft_proxy_policy": "direct_default", "subscription_urls": "鏈哄満A|https://example.com/a.yaml"},
+		"mihomo":     map[string]any{"linux_proxy_mode": "nft", "nft_proxy_policy": "direct_default", "subscription_urls": "机场A|https://example.com/a.yaml"},
 	})
 	if update.Code != http.StatusOK || !strings.Contains(update.Body.String(), `"restart_required":true`) || !strings.Contains(update.Body.String(), `"regenerate_required":true`) {
 		t.Fatalf("structured settings update mismatch: status=%d body=%s", update.Code, update.Body.String())

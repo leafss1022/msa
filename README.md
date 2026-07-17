@@ -1,43 +1,55 @@
-﻿# msa
+# msa
 
 <p align="center">
-  <img src="logo_motion/msm_logo_motion.gif" alt="MSA 鍔ㄦ€?Logo" width="320">
+  <img src="logo_motion/msm_logo_motion.gif" alt="MSA 动态 Logo" width="320">
 </p>
 
 [English README](README.en.md)
 
-[甯歌闂 FAQ](docs/faq.md)
+[常见问题 FAQ](docs/faq.md)
 
-`msa` 鏄竴涓潰鍚?MosDNS + Mihomo 宸ヤ綔娴佺殑 MSM 椋庢牸绠＄悊闈㈡澘閲嶆瀯鐗堛€傞」鐩洰鏍囨槸鎻愪緵鍙嚜閮ㄧ讲銆佸彲瀹¤鐨?DNS 鍒嗘祦銆侀€忔槑浠ｇ悊銆丮ihomo 绠＄悊鍜屽骞冲彴瀹夎浣撻獙銆?
-褰撳墠鍙戝竷鐗堟湰锛歚v0.4.2.0`
+`msa` 是一个面向 MosDNS + Mihomo 工作流的 MSM 风格管理面板重构版。项目目标是提供可自部署、可审计的 DNS 分流、透明代理、Mihomo 管理和多平台安装体验。
 
-> **鎻愮ず锛欳loudflare Redirect CLI 鎻掍欢涓烘祴璇曞姛鑳姐€?* 瀹冪敤浜庤鈥滀笉璧颁唬鐞嗙殑瀹㈡埛绔€濊闂敤鎴锋寚瀹氱殑 Cloudflare 鐩剧珯鏃讹紝杩斿洖鏈満缃戠粶瀹炴祴杈冨揩鐨?Cloudflare CDN IPv4/IPv6銆傝鍔熻兘渚濊禆鏈満缃戠粶銆佽繍钀ュ晢璺敱銆丆loudflare Anycast銆佸煙鍚嶅悕鍗曡川閲忓拰 MosDNS 褰撳墠閰嶇疆锛屼笉淇濊瘉涓€瀹氭瘮鍘熻В鏋愭洿蹇垨鏇寸ǔ瀹氥€傝缁嗙敤娉曡 [Cloudflare Redirect 鏂囨。](docs/plugins/cloudflare-redirect.md)銆?
-## 鍔熻兘姒傝
+当前发布版本：`v0.4.2.0`
 
-- 鍘熺増 MSM 椋庢牸 6 姝ュ垵濮嬪寲鍚戝锛岃鐩栫鐞嗗憳璐﹀彿銆佺郴缁熷弬鏁般€丏NS銆両Pv6銆丗ake-IP銆侀€忔槑浠ｇ悊鍜岀粍浠跺畨瑁呴厤缃€?- MosDNS + Mihomo 榛樿缁勫悎锛屾寜 mssb 椋庢牸鐢熸垚鍥藉唴澶栧垎娴侀摼璺細MosDNS `:53` 鍏ュ彛锛孧ihomo DNS `:6666`锛孎ake-IP `28.0.0.0/8`锛孴Proxy `7896`锛孯edirect `7877`銆?- 鏀寔鏈哄満璁㈤槄銆佹墜鍔ㄨ妭鐐广€丮osDNS 瀹㈡埛绔唬鐞嗘ā寮忋€丮ihomo 鑺傜偣/瑙勫垯/杩炴帴/鏃ュ織/閰嶇疆椤甸潰銆?- 鏀寔 Mihomo 鑷畾涔夐厤缃€丆odeMirror YAML 缂栬緫鍣ㄣ€佺粍浠舵洿鏂版鏌ャ€佽嚜鍔ㄤ笅杞姐€佹洿鏂伴€氱煡鍜屽崌绾ф柟寮忛厤缃€?- 鏀寔 MosDNS銆丮ihomo銆乑ashboard 鏈湴涓婁紶瀹夎锛岀綉缁滃洶闅炬椂鍙敤棰勪笅杞芥牳蹇冪绾垮畨瑁呫€?- 鏀寔 Linux tarball/systemd銆乫nOS FPK銆乁nraid PLG锛汥ocker TUN host/macvlan 褰撳墠涓哄疄楠岄儴缃层€?- Docker 閮ㄧ讲蹇呴』鎶婂涓绘満鏁版嵁鐩綍鏄犲皠鍒板鍣?`/opt/msa`锛岄粯璁ょず渚嬩娇鐢?`./msa-data:/opt/msa`銆?
-## 鏋舵瀯鍘熺悊鍥?
+> **提示：Cloudflare Redirect CLI 插件为测试功能。** 它用于让“不走代理的客户端”访问用户指定的 Cloudflare 盾站时，返回本机网络实测较快的 Cloudflare CDN IPv4/IPv6。该功能依赖本机网络、运营商路由、Cloudflare Anycast、域名名单质量和 MosDNS 当前配置，不保证一定比原解析更快或更稳定。详细用法见 [Cloudflare Redirect 文档](docs/plugins/cloudflare-redirect.md)。
+
+## 功能概览
+
+- 原版 MSM 风格 6 步初始化向导，覆盖管理员账号、系统参数、DNS、IPv6、Fake-IP、透明代理和组件安装配置。
+- MosDNS + Mihomo 默认组合，按 mssb 风格生成国内外分流链路：MosDNS `:53` 入口，Mihomo DNS `:6666`，Fake-IP `28.0.0.0/8`，TProxy `7896`，Redirect `7877`。
+- 支持机场订阅、手动节点、MosDNS 客户端代理模式、Mihomo 节点/规则/连接/日志/配置页面。
+- 支持 Mihomo 自定义配置、CodeMirror YAML 编辑器、组件更新检查、自动下载、更新通知和升级方式配置。
+- 支持 MosDNS、Mihomo、Zashboard 本地上传安装，网络困难时可用预下载核心离线安装。
+- 支持 Linux tarball/systemd、fnOS FPK、Unraid PLG；Docker TUN host/macvlan 当前为实验部署。
+- Docker 部署必须把宿主机数据目录映射到容器 `/opt/msa`，默认示例使用 `./msa-data:/opt/msa`。
+
+## 架构原理图
+
 <p align="center">
-  <img src="docs/png/framework-architecture.svg" alt="msa 鏃佽矾鐢变唬鐞嗗疄鐜板師鐞嗗浘">
+  <img src="docs/png/framework-architecture.svg" alt="msa 旁路由代理实现原理图">
 </p>
 
-## 骞冲彴鏀寔
+## 平台支持
 
-| 骞冲彴 | 鐘舵€?| 瀹夎鏂囨。 | 鏇存柊/鍗歌浇鏂瑰紡 |
+| 平台 | 状态 | 安装文档 | 更新/卸载方式 |
 |---|---|---|---|
-| Linux tarball/systemd | 绋冲畾鏀寔 | [Linux 瀹夎](docs/install/linux.md) | `msa update` / `msa uninstall` |
-| fnOS FPK | 鏀寔 | [fnOS FPK 瀹夎](docs/install/fnos-fpk.md) | fnOS / 椋炵墰搴旂敤涓績鎴?FPK 鍖呯鐞嗗櫒 |
-| Unraid PLG | 绋冲畾鏀寔 | [Unraid PLG 瀹夎](docs/install/unraid-plg.md) | Unraid 鎻掍欢绠＄悊椤甸潰 |
-| Docker TUN host/macvlan | 瀹為獙鎬э紝鏈畬鍏ㄥ畬鎴?| [Docker 瀹為獙閮ㄧ讲](docs/docker.md) | Docker / Compose / 瀹瑰櫒绠＄悊鍣?|
+| Linux tarball/systemd | 稳定支持 | [Linux 安装](docs/install/linux.md) | `msa update` / `msa uninstall` |
+| fnOS FPK | 支持 | [fnOS FPK 安装](docs/install/fnos-fpk.md) | fnOS / 飞牛应用中心或 FPK 包管理器 |
+| Unraid PLG | 稳定支持 | [Unraid PLG 安装](docs/install/unraid-plg.md) | Unraid 插件管理页面 |
+| Docker TUN host/macvlan | 实验性，未完全完成 | [Docker 实验部署](docs/docker.md) | Docker / Compose / 容器管理器 |
 
-`msa update` 鍜?`msa uninstall` 鍙潰鍚?Linux tarball/systemd 瀹夎銆俧nOS FPK銆乁nraid PLG銆丏ocker 璇烽€氳繃鍚勮嚜骞冲彴绠＄悊鍣ㄦ洿鏂版垨鍗歌浇锛岄伩鍏嶇粫杩囧寘鐘舵€併€?
-## 涓嬭浇
+`msa update` 和 `msa uninstall` 只面向 Linux tarball/systemd 安装。fnOS FPK、Unraid PLG、Docker 请通过各自平台管理器更新或卸载，避免绕过包状态。
 
-GitHub Release锛?
+## 下载
+
+GitHub Release：
+
 ```text
 https://github.com/leafss1022/msa/releases/tag/v0.4.2.0
 ```
 
-| 璧勪骇 | 涓嬭浇鍦板潃 |
+| 资产 | 下载地址 |
 |---|---|
 | Linux x86_64 | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa-linux-amd64.tar.gz` |
 | Linux ARM64 | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa-linux-arm64.tar.gz` |
@@ -45,35 +57,49 @@ https://github.com/leafss1022/msa/releases/tag/v0.4.2.0
 | fnOS ARM FPK | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa_0.4.2.0_arm.fpk` |
 | Unraid PLG | `https://github.com/leafss1022/msa/releases/download/v0.4.2.0/msa.plg` |
 
-## 蹇€熷紑濮?
-1. 鎸変綘鐨勮繍琛屽钩鍙伴€夋嫨瀹夎鏂囨。锛歀inux銆乫nOS銆乁nraid 鎴?Docker銆?2. 瀹夎鍚庢墦寮€ WebUI锛岄粯璁ゅ湴鍧€鏄?`http://<鏈嶅姟鍣↖P>:7777`銆?3. 瀹屾垚鍒濆鍖栧悜瀵笺€傞娆″垵濮嬪寲浼氬啓鍏ョ郴缁熼厤缃€佺敓鎴?MosDNS/Mihomo 閰嶇疆锛屽苟淇濆瓨鍒版暟鎹簱銆?4. 鍦ㄤ富璺敱涓婇厤缃?DHCP DNS 鍜?FakeIP 闈欐€佽矾鐢憋紝璁╁眬鍩熺綉瀹㈡埛绔祦閲忚繘鍏?msa銆?
-璺敱鍣ㄦ帴鍏ユ暀绋嬶細
+## 快速开始
 
-- [璺敱鍣ㄦ帴鍏ユ€昏](docs/guide/zh/router-integration.md)
-- [RouterOS锛圡ikroTik锛塢(docs/guide/zh/routeros.md)
-- [鐖卞揩 iKuai](docs/guide/zh/ikuai.md)
+1. 按你的运行平台选择安装文档：Linux、fnOS、Unraid 或 Docker。
+2. 安装后打开 WebUI，默认地址是 `http://<服务器IP>:7777`。
+3. 完成初始化向导。首次初始化会写入系统配置、生成 MosDNS/Mihomo 配置，并保存到数据库。
+4. 在主路由上配置 DHCP DNS 和 FakeIP 静态路由，让局域网客户端流量进入 msa。
+
+路由器接入教程：
+
+- [路由器接入总览](docs/guide/zh/router-integration.md)
+- [RouterOS（MikroTik）](docs/guide/zh/routeros.md)
+- [爱快 iKuai](docs/guide/zh/ikuai.md)
 - [OpenWrt](docs/guide/zh/openwrt.md)
-- [UniFi锛圲biquiti锛塢(docs/guide/zh/unifi.md)
+- [UniFi（Ubiquiti）](docs/guide/zh/unifi.md)
 
-杩愯鐩綍銆佺鍙ｅ拰鏂囦欢缁撴瀯瑙?[杩愯鍙傝€僝(docs/reference/runtime.md)銆?
-## 鎻掍欢鏂囨。
+运行目录、端口和文件结构见 [运行参考](docs/reference/runtime.md)。
 
-- [Cloudflare Redirect CLI 鎻掍欢](docs/plugins/cloudflare-redirect.md)锛氫负鈥滀笉璧颁唬鐞嗙殑瀹㈡埛绔€濇妸鎸囧畾 Cloudflare 鐩剧珯閲嶅畾鍚戝埌鏈満瀹炴祴杈冨揩鐨?Cloudflare CDN IPv4/IPv6銆?
-## 寮€鍙戜笌鍙戝竷
+## 插件文档
 
-鏈湴杩愯锛?
+- [Cloudflare Redirect CLI 插件](docs/plugins/cloudflare-redirect.md)：为“不走代理的客户端”把指定 Cloudflare 盾站重定向到本机实测较快的 Cloudflare CDN IPv4/IPv6。
+
+## 开发与发布
+
+本地运行：
+
 ```bash
 go run ./cmd/msa serve -c ./data -p 7777
 ```
 
-鍙戝竷鎵撳寘娴佺▼瑙?[RELEASING.md](RELEASING.md)銆俇nraid 鎵撳寘寮€鍙戣鏄庤 [packaging/unraid/README.md](packaging/unraid/README.md)銆?
-## 璇存槑
+发布打包流程见 [RELEASING.md](RELEASING.md)。Unraid 打包开发说明见 [packaging/unraid/README.md](packaging/unraid/README.md)。
 
-`msa` 涓嶅寘鍚?MSM 鐨勯棴婧愬悗绔唬鐮併€傞」鐩洰鏍囨槸鍋氫竴涓潪鍟嗕笟鐢ㄩ€旂殑寮€鏀鹃噸鏋勭増锛氬瑙傚拰浣跨敤浣撻獙鍙傝€?MSM锛屽悗绔涓哄洿缁?mssb 椋庢牸鐨?MosDNS + Mihomo 宸ヤ綔娴侀噸鏂板疄鐜般€?
-## 楦ｈ阿
+## 说明
 
-鎰熻阿杩欎簺椤圭洰鎻愪緵鍙傝€冿細
+`msa` 不包含 MSM 的闭源后端代码。项目目标是做一个非商业用途的开放重构版：外观和使用体验参考 MSM，后端行为围绕 mssb 风格的 MosDNS + Mihomo 工作流重新实现。
 
-- [`msm9527/msm-wiki`](https://github.com/msm9527/msm-wiki)锛氫綔涓?MSM 绠＄悊浣撻獙鍜屽姛鑳界粍缁囩殑鍏紑鍙傝€冦€?- [`baozaodetudou/mssb`](https://github.com/baozaodetudou/mssb)锛氫綔涓?MosDNS + Mihomo 鍚庣宸ヤ綔娴佺殑鍏紑鍙傝€冦€?- [Gzh256](https://github.com/Gzh256)锛氭劅璋㈠崗鍔╂祴璇曞拰楠岃瘉澶氫釜鐗堟湰銆?
-鏈」鐩笌 MSM銆乵ssb 涓婃父椤圭洰娌℃湁闅跺睘鍏崇郴銆?
-[![璁ゅ彲linux.do](https://ld.xh.do/ld-badge.svg)](https://linux.do/)
+## 鸣谢
+
+感谢这些项目提供参考：
+
+- [`msm9527/msm-wiki`](https://github.com/msm9527/msm-wiki)：作为 MSM 管理体验和功能组织的公开参考。
+- [`baozaodetudou/mssb`](https://github.com/baozaodetudou/mssb)：作为 MosDNS + Mihomo 后端工作流的公开参考。
+- [Gzh256](https://github.com/Gzh256)：感谢协助测试和验证多个版本。
+
+本项目与 MSM、mssb 上游项目没有隶属关系。
+
+[![认可linux.do](https://ld.xh.do/ld-badge.svg)](https://linux.do/)

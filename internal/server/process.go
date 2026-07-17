@@ -1,6 +1,7 @@
 package server
 
 import (
+	"runtime"
 	"bufio"
 	"context"
 	"errors"
@@ -9,7 +10,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"runtime"
 	"strconv"
 	"strings"
 	"sync"
@@ -114,9 +114,7 @@ func (sm *ServiceManager) Start(ctx context.Context, name string) (ServiceStatus
 	cmd.Dir = spec.Dir
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
-	if runtime.GOOS != "windows" {
-		cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
-	}
+	setProcessGroup(cmd)
 	if err := cmd.Start(); err != nil {
 		stdout.Close()
 		stderr.Close()

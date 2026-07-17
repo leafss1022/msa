@@ -1,4 +1,4 @@
-﻿.PHONY: dev build frontend import-web package unraid test audit-compliance clean
+.PHONY: dev build frontend import-web package unraid test audit-compliance clean
 
 APP_NAME := msa
 DIST := dist

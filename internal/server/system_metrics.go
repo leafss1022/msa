@@ -10,7 +10,6 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"syscall"
 	"time"
 )
 
@@ -179,16 +178,7 @@ func readNetworkCounters() []map[string]any {
 	return rows
 }
 
-func diskUsage(path string) map[string]any {
-	var stat syscall.Statfs_t
-	if err := syscall.Statfs(path, &stat); err != nil {
-		return map[string]any{"ok": false, "error": err.Error()}
-	}
-	total := stat.Blocks * uint64(stat.Bsize)
-	free := stat.Bavail * uint64(stat.Bsize)
-	used := total - free
-	return map[string]any{"ok": true, "total": total, "free": free, "used": used, "percent": percent(used, total)}
-}
+
 
 func tcpPortOpen(port int) bool {
 	conn, err := net.DialTimeout("tcp", net.JoinHostPort("127.0.0.1", strconv.Itoa(port)), 150*time.Millisecond)

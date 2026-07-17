@@ -1,4 +1,4 @@
-﻿package main
+package main
 
 import (
 	"archive/tar"
@@ -211,23 +211,23 @@ func serve(dataDir, host string, port int) error {
 		return err
 	}
 	defer app.Close()
-	app.LogInfo("app/app.go:114", "MSA 鍚庣鏈嶅姟鍚姩涓?..", nil)
-	app.LogInfo("app/app.go:115", "浣跨敤閰嶇疆鐩綍", map[string]any{"path": dataDir})
+	app.LogInfo("app/app.go:114", "MSA 后端服务启动中...", nil)
+	app.LogInfo("app/app.go:115", "使用配置目录", map[string]any{"path": dataDir})
 
 	if err := app.EnsureBaseLayout(); err != nil {
 		return err
 	}
-	app.LogInfo("app/app.go:158", "宸茬敓鎴愰厤缃枃浠跺苟钀藉湴褰撳墠鏈夋晥 JWT 瀵嗛挜", map[string]any{"file": filepath.Join(dataDir, "configs/app.yaml")})
-	app.LogInfo("app/app.go:173", "JWT閰嶇疆鍒濆鍖栨垚鍔?, nil)
-	app.LogInfo("app/app.go:182", "鏁版嵁搴撳垵濮嬪寲鎴愬姛", nil)
-	app.LogInfo("supervisor/manager.go:160", "Supervisord閰嶇疆鐢熸垚鎴愬姛", map[string]any{"config": filepath.Join(dataDir, "configs/supervisor/supervisord.conf")})
-	app.LogInfo("supervisor/manager.go:219", "Supervisord Manager 鍒濆鍖栨垚鍔?, nil)
-	app.LogInfo("app/app.go:209", "Supervisor 鍒濆鍖栨垚鍔?, nil)
-	app.LogInfo("app/app.go:217", "鏈嶅姟绠＄悊鍣ㄥ垵濮嬪寲鎴愬姛", nil)
-	app.LogInfo("app/app.go:221", "绯荤粺鐩戞帶鍣ㄥ垵濮嬪寲鎴愬姛", nil)
-	app.LogInfo("app/app.go:235", "璁稿彲璇佹湭鍚敤", map[string]any{"reason": "msa unlocked"})
-	app.LogInfo("app/app.go:241", "Setup 鏈嶅姟鍒濆鍖栨垚鍔?, nil)
-	app.LogInfo("app/app.go:246", "鏇存柊鏈嶅姟鍒濆鍖栨垚鍔?, nil)
+	app.LogInfo("app/app.go:158", "已生成配置文件并落地当前有效 JWT 密钥", map[string]any{"file": filepath.Join(dataDir, "configs/app.yaml")})
+	app.LogInfo("app/app.go:173", "JWT配置初始化成功", nil)
+	app.LogInfo("app/app.go:182", "数据库初始化成功", nil)
+	app.LogInfo("supervisor/manager.go:160", "Supervisord配置生成成功", map[string]any{"config": filepath.Join(dataDir, "configs/supervisor/supervisord.conf")})
+	app.LogInfo("supervisor/manager.go:219", "Supervisord Manager 初始化成功", nil)
+	app.LogInfo("app/app.go:209", "Supervisor 初始化成功", nil)
+	app.LogInfo("app/app.go:217", "服务管理器初始化成功", nil)
+	app.LogInfo("app/app.go:221", "系统监控器初始化成功", nil)
+	app.LogInfo("app/app.go:235", "许可证未启用", map[string]any{"reason": "msa unlocked"})
+	app.LogInfo("app/app.go:241", "Setup 服务初始化成功", nil)
+	app.LogInfo("app/app.go:246", "更新服务初始化成功", nil)
 	if err := os.WriteFile(filepath.Join(dataDir, "msa.pid"), []byte(fmt.Sprint(os.Getpid())), 0644); err != nil {
 		return err
 	}
@@ -238,7 +238,7 @@ func serve(dataDir, host string, port int) error {
 		defer cancel()
 		report := app.RestoreConfiguredRuntime(restoreCtx)
 		if len(report.Errors) > 0 {
-			app.LogError("app/app.go:298", "鍚姩鎭㈠瀹屾垚浣嗗瓨鍦ㄩ敊璇?, map[string]any{"errors": report.Errors})
+			app.LogError("app/app.go:298", "启动恢复完成但存在错误", map[string]any{"errors": report.Errors})
 			log.Printf("runtime restore completed with errors: %v", report.Errors)
 		}
 	}()
@@ -260,9 +260,9 @@ func serve(dataDir, host string, port int) error {
 		_ = srv.Shutdown(shutdownCtx)
 	}()
 
-	app.LogInfo("update/scheduler.go:51", "鏇存柊璋冨害鍣ㄥ凡鍚姩", map[string]any{"interval": 86400, "auto_download": false})
-	app.LogInfo("componentupdate/scheduler.go:54", "缁勪欢鏇存柊璋冨害鍣ㄥ凡鍚姩", nil)
-	app.LogInfo("app/app.go:372", "HTTP 鏈嶅姟鍣ㄥ惎鍔?, map[string]any{"addr": fmt.Sprintf("%s:%d", host, port)})
+	app.LogInfo("update/scheduler.go:51", "更新调度器已启动", map[string]any{"interval": 86400, "auto_download": false})
+	app.LogInfo("componentupdate/scheduler.go:54", "组件更新调度器已启动", nil)
+	app.LogInfo("app/app.go:372", "HTTP 服务器启动", map[string]any{"addr": fmt.Sprintf("%s:%d", host, port)})
 	log.Printf("msa %s listening on http://%s:%d data=%s", version, host, port, dataDir)
 	err = srv.ListenAndServe()
 	if errors.Is(err, http.ErrServerClosed) {
@@ -707,7 +707,7 @@ func uninstallRuntime(opts uninstallOptions) error {
 		return errors.New("on Unraid, remove msa from the WebGUI plugin page; application data is kept under /mnt/user/appdata/msa")
 	}
 	if isFnOSFPKRuntime() {
-		return errors.New("fnOS FPK installs must be removed from fnOS / 椋炵墰搴旂敤涓績 or the FPK package manager")
+		return errors.New("fnOS FPK installs must be removed from fnOS / 飞牛应用中心 or the FPK package manager")
 	}
 	if currentEUID() != 0 {
 		return errors.New("uninstall must be run as root")
@@ -921,13 +921,15 @@ func terminateProcess(pid int, timeout time.Duration) error {
 	if pid <= 0 || !processAlive(pid) {
 		return nil
 	}
-	_ = syscall.Kill(-pid, syscall.SIGTERM)
-	_ = syscall.Kill(pid, syscall.SIGTERM)
+	proc, err := os.FindProcess(pid)
+	if err != nil {
+		return nil
+	}
+	_ = proc.Signal(syscall.SIGTERM)
 	deadline := time.Now().Add(timeout)
 	for processAlive(pid) {
 		if time.Now().After(deadline) {
-			_ = syscall.Kill(-pid, syscall.SIGKILL)
-			_ = syscall.Kill(pid, syscall.SIGKILL)
+			_ = proc.Kill()
 			break
 		}
 		time.Sleep(100 * time.Millisecond)
@@ -985,7 +987,7 @@ func updateRuntime(opts updateOptions) error {
 		return errors.New("on Unraid, update msa from the WebGUI plugin page instead of the Linux tarball updater")
 	}
 	if isFnOSFPKRuntime() {
-		return errors.New("fnOS FPK installs must be updated from fnOS / 椋炵墰搴旂敤涓績 or the FPK package manager; the Linux tarball updater would create a separate /opt/msa install")
+		return errors.New("fnOS FPK installs must be updated from fnOS / 飞牛应用中心 or the FPK package manager; the Linux tarball updater would create a separate /opt/msa install")
 	}
 	if currentEUID() != 0 {
 		return errors.New("update must be run as root")
@@ -1116,7 +1118,7 @@ func serviceCommand(action string, opts serviceOptions) error {
 		return errors.New("Docker containers do not use systemd service install/uninstall; update or remove the container instead")
 	}
 	if isFnOSFPKRuntime() && (action == "install" || action == "uninstall" || action == "remove") {
-		return errors.New("fnOS FPK installs must be managed from fnOS / 椋炵墰搴旂敤涓績 or the FPK package manager")
+		return errors.New("fnOS FPK installs must be managed from fnOS / 飞牛应用中心 or the FPK package manager")
 	}
 	switch action {
 	case "install":
@@ -1144,7 +1146,7 @@ func installSystemdService(opts serviceOptions) error {
 		return errors.New("on Unraid, use /etc/rc.d/rc.msa and the WebGUI plugin page instead of systemd service install")
 	}
 	if isFnOSFPKRuntime() {
-		return errors.New("on fnOS FPK installs, manage msa from fnOS / 椋炵墰搴旂敤涓績 or the FPK package manager")
+		return errors.New("on fnOS FPK installs, manage msa from fnOS / 飞牛应用中心 or the FPK package manager")
 	}
 	if opts.ServiceName == "" {
 		opts.ServiceName = "msa"
@@ -1209,7 +1211,7 @@ func removeSystemdService(serviceName string) error {
 		return errors.New("on Unraid, remove msa from the WebGUI plugin page instead of systemd service uninstall")
 	}
 	if isFnOSFPKRuntime() {
-		return errors.New("on fnOS FPK installs, remove msa from fnOS / 椋炵墰搴旂敤涓績 or the FPK package manager")
+		return errors.New("on fnOS FPK installs, remove msa from fnOS / 飞牛应用中心 or the FPK package manager")
 	}
 	servicePath := filepath.Join(systemdServiceDir, serviceName+".service")
 	_ = runQuiet("systemctl", "stop", serviceName)

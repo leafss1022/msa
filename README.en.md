@@ -1,10 +1,10 @@
-﻿# msa
+# msa
 
 <p align="center">
   <img src="logo_motion/msm_logo_motion.gif" alt="MSA animated logo" width="320">
 </p>
 
-[涓枃 README](README.md)
+[中文 README](README.md)
 
 [FAQ](docs/faq.en.md)
 
