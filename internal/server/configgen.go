@@ -823,7 +823,7 @@ func (a *App) ensureMosDNSRuleFiles() error {
 	files := map[string]string{
 		"configs/mosdns/client_ip.txt":      "",
 		"configs/mosdns/rule/blocklist.txt": "",
-		"configs/mosdns/rule/rewrite.txt":   "# rewrite rules: domain target_ip",
+		"configs/mosdns/rule/rewrite.txt":   "",
 	}
 	for rel, content := range files {
 		path := filepath.Join(a.DataDir, rel)
