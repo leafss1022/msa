@@ -2,20 +2,20 @@
 
 本页面适用于 fnOS / 飞牛系统上的 `.fpk` 安装包。fnOS FPK 由 `fnos-fpk` 分支在同步 `main` 后构建，运行时由 fnOS / 飞牛应用中心或 FPK 包管理器管理。
 
-当前版本：`v0.4.4.0`
+当前版本：`v0.4.5.0`
 
 ## 下载
 
 Release 页面：
 
 ```text
-https://github.com/leafss1022/msa/releases/tag/v0.4.4.0
+https://github.com/leafss1022/msa/releases/tag/v0.4.5.0
 ```
 
 | 架构 | FPK 资产 |
 |---|---|
-| x86 / amd64 | `https://github.com/leafss1022/msa/releases/download/v0.4.4.0/msa_0.4.4.0_x86.fpk` |
-| ARM / arm64 | `https://github.com/leafss1022/msa/releases/download/v0.4.4.0/msa_0.4.4.0_arm.fpk` |
+| x86 / amd64 | `https://github.com/leafss1022/msa/releases/download/v0.4.5.0/msa_0.4.5.0_x86.fpk` |
+| ARM / arm64 | `https://github.com/leafss1022/msa/releases/download/v0.4.5.0/msa_0.4.5.0_arm.fpk` |
 
 请按 fnOS 设备 CPU 架构选择对应安装包。发布时也会提供对应 `.sha256` 校验文件。
 
